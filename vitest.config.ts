@@ -7,23 +7,14 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      imports: [
-        'vue',
-        'vitest',
-        {
-          '#app': ['useHead', 'useSeoMeta', 'useNuxtApp', 'useRoute', 'useRouter', 'navigateTo'],
-          '#imports': ['useHead', 'useSeoMeta', 'useRoute', 'useRouter', 'navigateTo']
-        }
-      ],
+      imports: ['vue', 'vitest'],
       dts: false
     })
   ],
   resolve: {
     alias: {
       '~': fileURLToPath(new URL('./', import.meta.url)),
-      '@': fileURLToPath(new URL('./', import.meta.url)),
-      '#app': fileURLToPath(new URL('./.nuxt/', import.meta.url)),
-      '#imports': fileURLToPath(new URL('./.nuxt/imports.d.ts', import.meta.url))
+      '@': fileURLToPath(new URL('./', import.meta.url))
     }
   },
   test: {
