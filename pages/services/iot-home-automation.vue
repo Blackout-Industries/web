@@ -136,8 +136,17 @@
       <div class="container mx-auto px-6">
         <h2 class="text-4xl font-bold mb-12 text-center gradient-text">Example Projects</h2>
 
-        <div class="space-y-6 max-w-4xl mx-auto">
-          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-cyan-500/30">
+        <div class="space-y-6 max-w-4xl mx-auto relative">
+          <div class="absolute inset-0 backdrop-blur-sm bg-gray-900/60 z-10 flex items-center justify-center rounded-lg">
+            <div class="text-center">
+              <div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 mb-4">
+                Coming Soon
+              </div>
+              <p class="text-xl text-gray-300">Building our portfolio showcase</p>
+            </div>
+          </div>
+
+          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-cyan-500/30 blur-sm">
             <h3 class="text-xl font-semibold mb-2 text-white">Whole Home Automation</h3>
             <p class="text-gray-400 mb-4">Complete smart home setup with 40+ devices, presence-based automation, and voice control across 3 floors. Energy usage reduced by 30%.</p>
             <div class="flex flex-wrap gap-2">
@@ -147,7 +156,7 @@
             </div>
           </div>
 
-          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-green-500/30">
+          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-green-500/30 blur-sm">
             <h3 class="text-xl font-semibold mb-2 text-white">Industrial IoT Monitoring</h3>
             <p class="text-gray-400 mb-4">Real-time equipment monitoring for manufacturing facility. Predictive maintenance alerts reduced downtime by 45%.</p>
             <div class="flex flex-wrap gap-2">
@@ -157,7 +166,7 @@
             </div>
           </div>
 
-          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-purple-500/30">
+          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-purple-500/30 blur-sm">
             <h3 class="text-xl font-semibold mb-2 text-white">Custom Environmental Sensors</h3>
             <p class="text-gray-400 mb-4">Network of ESP32-based sensors monitoring temperature, humidity, CO2, and air quality across office space with real-time dashboards.</p>
             <div class="flex flex-wrap gap-2">

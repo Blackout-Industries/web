@@ -188,8 +188,17 @@
       <div class="container mx-auto px-6">
         <h2 class="text-4xl font-bold mb-12 text-center gradient-text">Project Portfolio</h2>
 
-        <div class="space-y-6 max-w-4xl mx-auto">
-          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-purple-500/30">
+        <div class="space-y-6 max-w-4xl mx-auto relative">
+          <div class="absolute inset-0 backdrop-blur-sm bg-gray-900/60 z-10 flex items-center justify-center rounded-lg">
+            <div class="text-center">
+              <div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 mb-4">
+                Coming Soon
+              </div>
+              <p class="text-xl text-gray-300">Building our portfolio showcase</p>
+            </div>
+          </div>
+
+          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-purple-500/30 blur-sm">
             <h3 class="text-xl font-semibold mb-2 text-white">Multiplayer FPS Backend</h3>
             <p class="text-gray-400 mb-4">Scalable dedicated server infrastructure supporting 10,000+ concurrent players across 200+ game servers with real-time matchmaking.</p>
             <div class="flex flex-wrap gap-2">
@@ -200,7 +209,7 @@
             </div>
           </div>
 
-          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-cyan-500/30">
+          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-cyan-500/30 blur-sm">
             <h3 class="text-xl font-semibold mb-2 text-white">Browser-Based MMO</h3>
             <p class="text-gray-400 mb-4">WebGL-based massively multiplayer game with custom engine, 500+ simultaneous players per server, and real-time chat system.</p>
             <div class="flex flex-wrap gap-2">
@@ -211,7 +220,7 @@
             </div>
           </div>
 
-          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-orange-500/30">
+          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-orange-500/30 blur-sm">
             <h3 class="text-xl font-semibold mb-2 text-white">Mobile Game CI/CD Pipeline</h3>
             <p class="text-gray-400 mb-4">Automated build, test, and deployment system for Unity mobile game reducing release cycle from 2 weeks to 2 hours.</p>
             <div class="flex flex-wrap gap-2">
@@ -233,7 +242,7 @@
         <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <div class="text-center">
             <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Icon name="heroicons:lightning-bolt" class="w-8 h-8 text-white" />
+              <Icon name="heroicons:bolt" class="w-8 h-8 text-white" />
             </div>
             <h3 class="text-xl font-semibold mb-2 text-white">Ship Faster</h3>
             <p class="text-gray-400">We handle the backend complexity so your team can focus on gameplay.</p>
