@@ -1,13 +1,29 @@
 import { defineConfig } from 'vitest/config'
 import { fileURLToPath } from 'node:url'
 import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    AutoImport({
+      imports: [
+        'vue',
+        'vitest',
+        {
+          '#app': ['useHead', 'useSeoMeta', 'useNuxtApp', 'useRoute', 'useRouter', 'navigateTo'],
+          '#imports': ['useHead', 'useSeoMeta', 'useRoute', 'useRouter', 'navigateTo']
+        }
+      ],
+      dts: false
+    })
+  ],
   resolve: {
     alias: {
       '~': fileURLToPath(new URL('./', import.meta.url)),
-      '@': fileURLToPath(new URL('./', import.meta.url))
+      '@': fileURLToPath(new URL('./', import.meta.url)),
+      '#app': fileURLToPath(new URL('./.nuxt/', import.meta.url)),
+      '#imports': fileURLToPath(new URL('./.nuxt/imports.d.ts', import.meta.url))
     }
   },
   test: {
@@ -15,6 +31,7 @@ export default defineConfig({
     exclude: ['tests/e2e/**', 'node_modules/**'],
     environment: 'happy-dom',
     globals: true,
+    setupFiles: ['./tests/setup.ts'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
