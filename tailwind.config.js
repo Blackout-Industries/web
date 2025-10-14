@@ -11,22 +11,28 @@ module.exports = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#0EA5E9',
-          dark: '#0284C7',
-          light: '#38BDF8'
+          DEFAULT: '#FF6B00',  // Tactical orange from logo
+          dark: '#E05500',
+          light: '#FF8C33'
         },
-        secondary: '#10B981',
-        accent: '#8B5CF6',
+        secondary: '#FFB366',  // Lighter orange accent
+        accent: '#FF4500',  // Hot orange for highlights
         dark: {
-          DEFAULT: '#0A0A0A',
-          100: '#141414',
-          200: '#1E1E1E',
-          300: '#262626'
+          DEFAULT: '#0A0A0A',  // Deep black
+          100: '#141414',      // Slightly lighter
+          200: '#1E1E1E',      // Military gray
+          300: '#2A2A2A'       // Border gray
         },
         text: {
-          primary: '#FAFAFA',
-          secondary: '#A3A3A3',
-          tertiary: '#737373'
+          primary: '#FAFAFA',   // White text
+          secondary: '#B0B0B0', // Gray text
+          tertiary: '#808080'   // Muted gray
+        },
+        tactical: {
+          orange: '#FF6B00',
+          amber: '#FFB366',
+          slate: '#3A3A3A',
+          charcoal: '#1A1A1A'
         }
       },
       fontFamily: {
@@ -48,8 +54,8 @@ module.exports = {
           '100%': { transform: 'translateY(0)', opacity: '1' }
         },
         glow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.3)' },
-          '50%': { boxShadow: '0 0 30px rgba(14, 165, 233, 0.6)' }
+          '0%, 100%': { boxShadow: '0 0 20px rgba(255, 107, 0, 0.3)' },
+          '50%': { boxShadow: '0 0 30px rgba(255, 107, 0, 0.6)' }
         }
       }
     }

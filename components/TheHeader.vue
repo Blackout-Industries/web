@@ -3,11 +3,13 @@
     <nav class="container-custom">
       <div class="flex items-center justify-between h-16 md:h-20">
         <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center space-x-2 group">
-          <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-            <span class="text-white font-bold text-lg md:text-xl">B</span>
-          </div>
-          <span class="text-lg md:text-xl font-bold text-text-primary">Blackout Industries</span>
+        <NuxtLink to="/" class="flex items-center space-x-3 group">
+          <img
+            src="/logo.png"
+            alt="Blackout Industries"
+            class="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-110 transition-transform filter drop-shadow-lg"
+          />
+          <span class="text-lg md:text-xl font-bold text-text-primary tracking-tight">Blackout Industries</span>
         </NuxtLink>
 
         <!-- Desktop Navigation -->
