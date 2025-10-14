@@ -4,14 +4,25 @@
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
         <!-- Brand -->
         <div class="col-span-1 md:col-span-2">
-          <div class="flex items-center space-x-2 mb-4">
-            <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
-              <span class="text-white font-bold text-xl">B</span>
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="relative w-14 h-14 rounded-lg flex items-center justify-center">
+              <!-- Orange glow -->
+              <div class="absolute inset-0 bg-primary/15 rounded-lg blur-lg"></div>
+              <!-- Logo container -->
+              <div class="relative w-full h-full rounded-lg bg-gradient-to-br from-dark-200 to-dark flex items-center justify-center shadow-md shadow-primary/10 overflow-hidden">
+                <img
+                  src="/logo.png"
+                  alt="Blackout Industries"
+                  class="w-[140%] h-[140%] object-cover"
+                />
+              </div>
             </div>
-            <span class="text-xl font-bold text-text-primary">Blackout Industries</span>
+            <span class="text-xl font-bold">
+              <span class="text-primary">Blackout</span> <span class="text-text-primary">Industries</span>
+            </span>
           </div>
           <p class="text-text-secondary max-w-md mb-4">
-            Engineering infrastructure that scales. DevOps consulting, platform engineering, and precision 3D printing for modern teams.
+            Engineering infrastructure that scales. DevOps consulting, IoT automation, game infrastructure, and precision 3D printing for modern teams.
           </p>
           <div class="flex space-x-4">
             <a href="https://github.com/blackoutindustries" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
@@ -38,6 +49,8 @@
           <ul class="space-y-2">
             <li><NuxtLink to="/services/devops-consulting" class="footer-link">DevOps Consulting</NuxtLink></li>
             <li><NuxtLink to="/services/3d-printing" class="footer-link">3D Printing</NuxtLink></li>
+            <li><NuxtLink to="/services/iot-home-automation" class="footer-link">IoT & Home Automation</NuxtLink></li>
+            <li><NuxtLink to="/services/game-development" class="footer-link">Game Development</NuxtLink></li>
           </ul>
         </div>
       </div>

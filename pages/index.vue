@@ -6,8 +6,46 @@
       <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-100 to-dark opacity-90"></div>
       <div class="absolute inset-0 animated-gradient opacity-10"></div>
 
-      <!-- Grid Pattern -->
-      <div class="absolute inset-0 opacity-20" style="background-image: linear-gradient(#0EA5E9 1px, transparent 1px), linear-gradient(90deg, #0EA5E9 1px, transparent 1px); background-size: 50px 50px;"></div>
+      <!-- Tactical Topographic Grid -->
+      <div class="absolute inset-0 opacity-30">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="topo-grid" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+              <!-- Diagonal lines creating isometric effect -->
+              <path d="M 0,50 L 100,50" stroke="#FF6B00" stroke-width="0.5" opacity="0.3" />
+              <path d="M 0,25 L 100,25" stroke="#FF6B00" stroke-width="0.5" opacity="0.2" />
+              <path d="M 0,75 L 100,75" stroke="#FF6B00" stroke-width="0.5" opacity="0.2" />
+
+              <!-- Vertical lines -->
+              <path d="M 50,0 L 50,100" stroke="#FF6B00" stroke-width="0.5" opacity="0.3" />
+              <path d="M 25,0 L 25,100" stroke="#FF6B00" stroke-width="0.5" opacity="0.2" />
+              <path d="M 75,0 L 75,100" stroke="#FF6B00" stroke-width="0.5" opacity="0.2" />
+
+              <!-- Corner markers -->
+              <circle cx="50" cy="50" r="2" fill="#FF6B00" opacity="0.4" />
+            </pattern>
+
+            <!-- Animated gradient overlay -->
+            <linearGradient id="topo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#FF6B00;stop-opacity:0.1">
+                <animate attributeName="stop-opacity" values="0.1;0.3;0.1" dur="4s" repeatCount="indefinite" />
+              </stop>
+              <stop offset="50%" style="stop-color:#FF8C33;stop-opacity:0.2">
+                <animate attributeName="stop-opacity" values="0.2;0.4;0.2" dur="4s" repeatCount="indefinite" />
+              </stop>
+              <stop offset="100%" style="stop-color:#FF6B00;stop-opacity:0.1">
+                <animate attributeName="stop-opacity" values="0.1;0.3;0.1" dur="4s" repeatCount="indefinite" />
+              </stop>
+            </linearGradient>
+          </defs>
+
+          <!-- Base grid -->
+          <rect width="100%" height="100%" fill="url(#topo-grid)" />
+
+          <!-- Animated gradient overlay -->
+          <rect width="100%" height="100%" fill="url(#topo-gradient)" />
+        </svg>
+      </div>
 
       <!-- Content -->
       <div class="container-custom relative z-10 text-center py-20">

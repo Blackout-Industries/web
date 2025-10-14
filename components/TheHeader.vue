@@ -4,14 +4,21 @@
       <div class="flex items-center justify-between h-16 md:h-20">
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center space-x-3 group">
-          <div class="relative w-14 h-14 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-dark-200 to-dark flex items-center justify-center border border-primary/20 group-hover:border-primary/40 transition-all">
-            <img
-              src="/logo.png"
-              alt="Blackout Industries"
-              class="w-12 h-12 md:w-14 md:h-14 object-contain group-hover:scale-110 transition-transform"
-            />
+          <div class="relative w-14 h-14 md:w-16 md:h-16 rounded-lg flex items-center justify-center">
+            <!-- Orange glow -->
+            <div class="absolute inset-0 bg-primary/20 rounded-lg blur-lg group-hover:bg-primary/30 transition-all"></div>
+            <!-- Logo container -->
+            <div class="relative w-full h-full rounded-lg bg-gradient-to-br from-dark-200 to-dark flex items-center justify-center transition-all shadow-lg shadow-primary/10 group-hover:shadow-primary/20 overflow-hidden">
+              <img
+                src="/logo.png"
+                alt="Blackout Industries"
+                class="w-[140%] h-[140%] object-cover group-hover:scale-110 transition-transform"
+              />
+            </div>
           </div>
-          <span class="text-lg md:text-xl font-bold text-text-primary tracking-tight">Blackout Industries</span>
+          <span class="text-lg md:text-xl font-bold tracking-tight">
+            <span class="text-primary">Blackout</span> <span class="text-text-primary">Industries</span>
+          </span>
         </NuxtLink>
 
         <!-- Desktop Navigation -->
