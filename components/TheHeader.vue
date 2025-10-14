@@ -4,11 +4,13 @@
       <div class="flex items-center justify-between h-16 md:h-20">
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center space-x-3 group">
-          <img
-            src="/logo.png"
-            alt="Blackout Industries"
-            class="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-110 transition-transform filter drop-shadow-lg"
-          />
+          <div class="relative w-14 h-14 md:w-16 md:h-16 rounded-lg bg-gradient-to-br from-dark-200 to-dark flex items-center justify-center border border-primary/20 group-hover:border-primary/40 transition-all">
+            <img
+              src="/logo.png"
+              alt="Blackout Industries"
+              class="w-12 h-12 md:w-14 md:h-14 object-contain group-hover:scale-110 transition-transform"
+            />
+          </div>
           <span class="text-lg md:text-xl font-bold text-text-primary tracking-tight">Blackout Industries</span>
         </NuxtLink>
 
