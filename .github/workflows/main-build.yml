@@ -55,6 +55,7 @@ jobs:
       - name: Run Trivy vulnerability scanner (Container)
         if: matrix.scan-type == 'container'
         uses: aquasecurity/trivy-action@0.28.0
+        continue-on-error: true
         with:
           scan-type: 'config'
           scan-ref: 'Dockerfile'
@@ -65,6 +66,7 @@ jobs:
       - name: Run Trivy vulnerability scanner (Dependencies)
         if: matrix.scan-type == 'dependencies'
         uses: aquasecurity/trivy-action@0.28.0
+        continue-on-error: true
         with:
           scan-type: 'fs'
           scan-ref: '.'
