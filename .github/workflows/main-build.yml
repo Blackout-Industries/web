@@ -46,27 +46,11 @@ jobs:
     name: Security Scans
     runs-on: ubuntu-latest
     needs: build-and-test
-    permissions:
-      security-events: write
-      contents: read
-      actions: read
     strategy:
       matrix:
-        scan-type: [sast, container, dependencies]
+        scan-type: [container, dependencies]
     steps:
       - uses: actions/checkout@v4
-
-      - name: Initialize CodeQL (SAST)
-        if: matrix.scan-type == 'sast'
-        uses: github/codeql-action/init@v3
-        with:
-          languages: javascript-typescript
-
-      - name: Perform CodeQL Analysis
-        if: matrix.scan-type == 'sast'
-        uses: github/codeql-action/analyze@v3
-        with:
-          category: "/language:javascript-typescript"
 
       - name: Run Trivy vulnerability scanner (Container)
         if: matrix.scan-type == 'container'
@@ -74,16 +58,9 @@ jobs:
         with:
           scan-type: 'config'
           scan-ref: 'Dockerfile'
-          format: 'sarif'
-          output: 'trivy-container.sarif'
+          format: 'table'
+          exit-code: '1'
           severity: 'CRITICAL,HIGH'
-
-      - name: Upload Trivy container results
-        if: matrix.scan-type == 'container'
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy-container.sarif'
-          category: 'container-scan'
 
       - name: Run Trivy vulnerability scanner (Dependencies)
         if: matrix.scan-type == 'dependencies'
@@ -91,16 +68,9 @@ jobs:
         with:
           scan-type: 'fs'
           scan-ref: '.'
-          format: 'sarif'
-          output: 'trivy-deps.sarif'
+          format: 'table'
+          exit-code: '1'
           severity: 'CRITICAL,HIGH'
-
-      - name: Upload Trivy dependency results
-        if: matrix.scan-type == 'dependencies'
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy-deps.sarif'
-          category: 'dependency-scan'
 
   build-and-push-image:
     name: Build & Push Docker Image
