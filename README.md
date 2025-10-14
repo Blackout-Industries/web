@@ -1,5 +1,9 @@
 # Blackout Industries Website
 
+[![PR Checks](https://github.com/Blackout-Industries/web/actions/workflows/pr-checks.yml/badge.svg)](https://github.com/Blackout-Industries/web/actions/workflows/pr-checks.yml)
+[![Main Build](https://github.com/Blackout-Industries/web/actions/workflows/main-build.yml/badge.svg)](https://github.com/Blackout-Industries/web/actions/workflows/main-build.yml)
+[![Release](https://github.com/Blackout-Industries/web/actions/workflows/release.yml/badge.svg)](https://github.com/Blackout-Industries/web/actions/workflows/release.yml)
+
 > Modern, production-ready website for Blackout Industries s.r.o - DevOps consulting, platform engineering, and precision 3D printing services.
 
 ## Overview

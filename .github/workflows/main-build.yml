@@ -1,0 +1,202 @@
+name: Main Build & Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm run test:unit
+
+      - name: Build application
+        run: npm run build
+
+      - name: Generate static site
+        run: npm run generate
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: .output/
+          retention-days: 7
+
+  security-scans:
+    name: Security Scans
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    permissions:
+      security-events: write
+      contents: read
+    strategy:
+      matrix:
+        scan-type: [sast, container, dependencies]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL (SAST)
+        if: matrix.scan-type == 'sast'
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+
+      - name: Perform CodeQL Analysis
+        if: matrix.scan-type == 'sast'
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"
+
+      - name: Run Trivy vulnerability scanner (Container)
+        if: matrix.scan-type == 'container'
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'config'
+          scan-ref: 'Dockerfile'
+          format: 'sarif'
+          output: 'trivy-container.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy container results
+        if: matrix.scan-type == 'container'
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-container.sarif'
+          category: 'container-scan'
+
+      - name: Run Trivy vulnerability scanner (Dependencies)
+        if: matrix.scan-type == 'dependencies'
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-deps.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy dependency results
+        if: matrix.scan-type == 'dependencies'
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-deps.sarif'
+          category: 'dependency-scan'
+
+  build-and-push-image:
+    name: Build & Push Docker Image
+    runs-on: ubuntu-latest
+    needs: [build-and-test, security-scans]
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image-digest: ${{ steps.build.outputs.digest }}
+      image-tags: ${{ steps.meta.outputs.tags }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=sha,prefix={{branch}}-,format=short
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=staging,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          target: production
+          provenance: true
+          sbom: true
+
+      - name: Generate SBOM
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: 'image'
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+          format: 'cyclonedx'
+          output: 'sbom.json'
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.json
+          retention-days: 90
+
+  promote-to-staging:
+    name: Promote to Staging
+    runs-on: ubuntu-latest
+    needs: build-and-push-image
+    environment:
+      name: staging
+      url: https://staging.blackout-industries.com
+    steps:
+      - name: Deployment notification
+        run: |
+          echo "🚀 Image promoted to staging environment"
+          echo "Image: ${{ needs.build-and-push-image.outputs.image-tags }}"
+          echo "Digest: ${{ needs.build-and-push-image.outputs.image-digest }}"
+          echo ""
+          echo "⚠️  NOTE: Actual deployment to self-hosted infrastructure"
+          echo "will be triggered separately via your hosting platform."
+          echo ""
+          echo "Next steps:"
+          echo "1. Pull image: docker pull ${{ needs.build-and-push-image.outputs.image-tags }}"
+          echo "2. Deploy to your infrastructure"
+          echo "3. Run smoke tests"
+
+      - name: Create deployment marker
+        run: |
+          echo "STAGING_IMAGE_TAG=${{ needs.build-and-push-image.outputs.image-tags }}" >> $GITHUB_ENV
+          echo "STAGING_IMAGE_DIGEST=${{ needs.build-and-push-image.outputs.image-digest }}" >> $GITHUB_ENV
+          echo "STAGING_DEPLOYED_AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
+
+      - name: Comment on commit
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: context.sha,
+              body: `## 🚀 Staging Deployment Ready\n\n**Image:** \`${{ needs.build-and-push-image.outputs.image-tags }}\`\n**Digest:** \`${{ needs.build-and-push-image.outputs.image-digest }}\`\n\n### Deploy to your infrastructure:\n\`\`\`bash\ndocker pull ${{ needs.build-and-push-image.outputs.image-tags }}\n# Deploy using your hosting platform\n\`\`\``
+            })
