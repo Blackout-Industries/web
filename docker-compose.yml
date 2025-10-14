@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.nuxt
+      - /app/.output
+    environment:
+      - NODE_ENV=development
+      - NITRO_HOST=0.0.0.0
+      - NITRO_PORT=3000
+
+  prod:
+    build:
+      context: .
+      target: production
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
