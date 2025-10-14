@@ -12,7 +12,7 @@
             <span class="gradient-text block mt-2">Modern Teams</span>
           </h1>
           <p class="text-xl md:text-2xl text-text-secondary">
-            From Kubernetes to CAD models—we deliver precision at scale.
+            From cloud infrastructure to smart homes, game backends to precision 3D printing—we deliver expertise at scale.
           </p>
         </div>
       </div>
@@ -51,6 +51,38 @@
               'Material selection consulting',
               'Post-processing & finishing',
               'Multi-material & multi-color printing'
+            ]"
+          />
+
+          <ServiceCard
+            icon="heroicons:home-modern"
+            title="IoT & Home Automation"
+            description="Smart home solutions and IoT systems that actually work. From concept to deployment, we build intelligent automation that integrates seamlessly with your life."
+            link="/services/iot-home-automation"
+            variant="primary"
+            :features="[
+              'Smart lighting & climate control',
+              'Security systems & monitoring',
+              'Multi-room audio integration',
+              'Energy monitoring & optimization',
+              'Custom sensor development',
+              'Privacy-first architecture'
+            ]"
+          />
+
+          <ServiceCard
+            icon="heroicons:puzzle-piece"
+            title="Game Development"
+            description="From indie prototypes to production-ready multiplayer systems. We build games, game engines, and backend infrastructure that scales."
+            link="/services/game-development"
+            variant="accent"
+            :features="[
+              'Multiplayer backend infrastructure',
+              'Low-latency networking & netcode',
+              'Engine development & optimization',
+              'DevOps & CI/CD for game studios',
+              'Analytics & telemetry systems',
+              'Anti-cheat & security hardening'
             ]"
           />
         </div>
@@ -130,7 +162,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'DevOps consulting, platform engineering, and 3D printing services. From Kubernetes to CAD models—we deliver precision at scale.'
+      content: 'DevOps consulting, platform engineering, IoT/home automation, game development, and 3D printing services. From Kubernetes to smart homes to multiplayer backends—we deliver precision at scale.'
     }
   ]
 })

@@ -41,6 +41,20 @@
                   <div class="text-xs text-text-tertiary">Rapid Prototyping</div>
                 </div>
               </NuxtLink>
+              <NuxtLink to="/services/iot-home-automation" class="dropdown-item">
+                <Icon name="heroicons:home-modern" class="w-5 h-5 text-primary" />
+                <div>
+                  <div class="font-medium">IoT & Home Automation</div>
+                  <div class="text-xs text-text-tertiary">Smart Home Solutions</div>
+                </div>
+              </NuxtLink>
+              <NuxtLink to="/services/game-development" class="dropdown-item">
+                <Icon name="heroicons:puzzle-piece" class="w-5 h-5 text-accent" />
+                <div>
+                  <div class="font-medium">Game Development</div>
+                  <div class="text-xs text-text-tertiary">Multiplayer & Backends</div>
+                </div>
+              </NuxtLink>
             </div>
           </div>
           <NuxtLink to="/about" class="nav-link">About</NuxtLink>
@@ -71,6 +85,14 @@
             <NuxtLink to="/services/3d-printing" class="mobile-nav-link pl-4" @click="mobileMenuOpen = false">
               <Icon name="heroicons:cube-transparent" class="w-5 h-5 text-secondary" />
               <span>3D Printing</span>
+            </NuxtLink>
+            <NuxtLink to="/services/iot-home-automation" class="mobile-nav-link pl-4" @click="mobileMenuOpen = false">
+              <Icon name="heroicons:home-modern" class="w-5 h-5 text-primary" />
+              <span>IoT & Home Automation</span>
+            </NuxtLink>
+            <NuxtLink to="/services/game-development" class="mobile-nav-link pl-4" @click="mobileMenuOpen = false">
+              <Icon name="heroicons:puzzle-piece" class="w-5 h-5 text-accent" />
+              <span>Game Development</span>
             </NuxtLink>
             <NuxtLink to="/about" class="mobile-nav-link" @click="mobileMenuOpen = false">About</NuxtLink>
             <NuxtLink to="/contact" class="btn btn-primary w-full text-center" @click="mobileMenuOpen = false">Contact</NuxtLink>
