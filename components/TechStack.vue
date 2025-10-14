@@ -19,8 +19,8 @@
           <span class="tech-label">AWS</span>
         </div>
 
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-blue-500 to-blue-600">
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-blue-500 to-blue-600 featured-glow">
             <Icon name="heroicons:cloud" class="w-8 h-8 text-white" />
           </div>
           <span class="tech-label">Azure</span>
@@ -34,15 +34,15 @@
         </div>
 
         <!-- Container & Orchestration -->
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-primary to-primary-dark">
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-primary to-primary-dark featured-glow">
             <Icon name="simple-icons:docker" class="w-8 h-8 text-white" />
           </div>
           <span class="tech-label">Docker</span>
         </div>
 
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-accent to-purple-600">
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-accent to-purple-600 featured-glow">
             <Icon name="simple-icons:kubernetes" class="w-8 h-8 text-white" />
           </div>
           <span class="tech-label">Kubernetes</span>
@@ -56,11 +56,11 @@
         </div>
 
         <!-- IaC & Configuration -->
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-purple-500 to-purple-700">
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-purple-500 to-purple-700 featured-glow">
             <Icon name="simple-icons:terraform" class="w-8 h-8 text-white" />
           </div>
-          <span class="tech-label">Terraform</span>
+          <span class="tech-label">Terraform CDK</span>
         </div>
 
         <div class="tech-item group">
@@ -70,11 +70,11 @@
           <span class="tech-label">Ansible</span>
         </div>
 
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-secondary to-green-600">
-            <Icon name="heroicons:code-bracket" class="w-8 h-8 text-white" />
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-blue-500 to-cyan-500 featured-glow">
+            <Icon name="heroicons:puzzle-piece" class="w-8 h-8 text-white" />
           </div>
-          <span class="tech-label">Pulumi</span>
+          <span class="tech-label">Crossplane</span>
         </div>
 
         <!-- CI/CD -->
@@ -92,11 +92,11 @@
           <span class="tech-label">GitLab CI</span>
         </div>
 
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-red-500 to-red-600">
-            <Icon name="lucide:git-branch" class="w-8 h-8 text-white" />
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-purple-500 to-pink-500 featured-glow">
+            <Icon name="heroicons:building-office-2" class="w-8 h-8 text-white" />
           </div>
-          <span class="tech-label">Jenkins</span>
+          <span class="tech-label">Backstage</span>
         </div>
 
         <!-- Monitoring & Observability -->
@@ -136,8 +136,8 @@
           <span class="tech-label">SOPS</span>
         </div>
 
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-primary to-secondary">
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-primary to-secondary featured-glow">
             <Icon name="lucide:server" class="w-8 h-8 text-white" />
           </div>
           <span class="tech-label">ArgoCD</span>
@@ -193,5 +193,25 @@
 
 .tech-label {
   @apply text-sm font-medium text-text-secondary group-hover:text-text-primary transition-colors duration-300;
+}
+
+/* Featured 2025 tools with animated glow */
+.tech-item.featured .tech-icon-wrapper.featured-glow {
+  position: relative;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.tech-item.featured:hover .tech-icon-wrapper.featured-glow {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(59, 130, 246, 0.5);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.7), 0 0 60px rgba(59, 130, 246, 0.4);
+  }
 }
 </style>

@@ -32,7 +32,7 @@
               'Cloud infrastructure (AWS, GCP, Azure)',
               'Kubernetes & container orchestration',
               'CI/CD pipeline design & automation',
-              'Infrastructure as Code (Terraform, Pulumi)',
+              'Infrastructure as Code (Terraform CDK, Crossplane)',
               'Monitoring & observability setup',
               'Security best practices & compliance'
             ]"
@@ -60,6 +60,7 @@
             description="Smart home solutions and IoT systems that actually work. From concept to deployment, we build intelligent automation that integrates seamlessly with your life."
             link="/services/iot-home-automation"
             variant="primary"
+            :coming-soon="true"
             :features="[
               'Smart lighting & climate control',
               'Security systems & monitoring',
@@ -76,6 +77,7 @@
             description="From indie prototypes to production-ready multiplayer systems. We build games, game engines, and backend infrastructure that scales."
             link="/services/game-development"
             variant="accent"
+            :coming-soon="true"
             :features="[
               'Multiplayer backend infrastructure',
               'Low-latency networking & netcode',

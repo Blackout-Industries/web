@@ -17,7 +17,7 @@
             <span class="gradient-text block mt-2">That Scales</span>
           </h1>
           <p class="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto mb-8 text-balance">
-            DevOps consulting, platform engineering, and precision 3D printing for modern teams.
+            DevOps consulting, IoT automation, game infrastructure, and precision 3D printing for modern teams.
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="#services" class="btn btn-primary text-lg">
@@ -44,7 +44,7 @@
             Our <span class="gradient-text">Services</span>
           </h2>
           <p class="text-lg text-text-secondary max-w-2xl mx-auto">
-            From cloud infrastructure to physical prototypes—we deliver precision at scale.
+            From cloud infrastructure to smart homes, game backends to physical prototypes—we deliver precision at scale.
           </p>
         </div>
 
@@ -74,6 +74,36 @@
               'Custom part manufacturing',
               'CAD model optimization',
               'Multi-material printing'
+            ]"
+          />
+
+          <ServiceCard
+            icon="heroicons:home-modern"
+            title="IoT & Home Automation"
+            description="Smart home solutions that integrate seamlessly. From concept to deployment."
+            link="/services/iot-home-automation"
+            variant="primary"
+            :coming-soon="true"
+            :features="[
+              'Smart lighting & climate',
+              'Security & monitoring',
+              'Energy optimization',
+              'Privacy-first architecture'
+            ]"
+          />
+
+          <ServiceCard
+            icon="heroicons:puzzle-piece"
+            title="Game Development"
+            description="From indie prototypes to production multiplayer systems and game infrastructure."
+            link="/services/game-development"
+            variant="accent"
+            :coming-soon="true"
+            :features="[
+              'Multiplayer backends',
+              'Low-latency networking',
+              'Engine development',
+              'DevOps for game studios'
             ]"
           />
         </div>
@@ -147,11 +177,11 @@
 
 <script setup lang="ts">
 useHead({
-  title: 'Blackout Industries - DevOps & 3D Printing Consulting',
+  title: 'Blackout Industries - DevOps, IoT, Game Dev & 3D Printing',
   meta: [
     {
       name: 'description',
-      content: 'DevOps consulting, platform engineering, and precision 3D printing for modern teams. Engineering infrastructure that scales.'
+      content: 'DevOps consulting, platform engineering, IoT/home automation, game development, and 3D printing for modern teams. Engineering infrastructure that scales.'
     }
   ]
 })

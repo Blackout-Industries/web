@@ -58,7 +58,10 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card relative">
+            <div class="absolute top-4 right-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+              Coming Soon™
+            </div>
             <div class="flex items-start space-x-4">
               <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center flex-shrink-0">
                 <Icon name="lucide:box" class="w-6 h-6 text-white" />

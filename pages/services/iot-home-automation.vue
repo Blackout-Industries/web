@@ -66,35 +66,35 @@
           <h3 class="text-2xl font-semibold mb-6 text-center text-white">Technologies We Use</h3>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             <div>
-              <div class="text-3xl mb-2">🏠</div>
+              <Icon name="heroicons:home-modern" class="w-10 h-10 mx-auto mb-2 text-cyan-400" />
               <div class="text-sm text-gray-300">Home Assistant</div>
             </div>
             <div>
-              <div class="text-3xl mb-2">📡</div>
+              <Icon name="heroicons:signal" class="w-10 h-10 mx-auto mb-2 text-green-400" />
               <div class="text-sm text-gray-300">MQTT</div>
             </div>
             <div>
-              <div class="text-3xl mb-2">🔌</div>
+              <Icon name="heroicons:bolt" class="w-10 h-10 mx-auto mb-2 text-yellow-400" />
               <div class="text-sm text-gray-300">Zigbee / Z-Wave</div>
             </div>
             <div>
-              <div class="text-3xl mb-2">☁️</div>
+              <Icon name="heroicons:cloud" class="w-10 h-10 mx-auto mb-2 text-blue-400" />
               <div class="text-sm text-gray-300">AWS IoT Core</div>
             </div>
             <div>
-              <div class="text-3xl mb-2">🐍</div>
+              <Icon name="heroicons:code-bracket" class="w-10 h-10 mx-auto mb-2 text-purple-400" />
               <div class="text-sm text-gray-300">Python / Node.js</div>
             </div>
             <div>
-              <div class="text-3xl mb-2">🤖</div>
+              <Icon name="heroicons:cpu-chip" class="w-10 h-10 mx-auto mb-2 text-orange-400" />
               <div class="text-sm text-gray-300">ESP32 / Arduino</div>
             </div>
             <div>
-              <div class="text-3xl mb-2">🎮</div>
+              <Icon name="heroicons:squares-2x2" class="w-10 h-10 mx-auto mb-2 text-pink-400" />
               <div class="text-sm text-gray-300">Node-RED</div>
             </div>
             <div>
-              <div class="text-3xl mb-2">📊</div>
+              <Icon name="heroicons:chart-bar" class="w-10 h-10 mx-auto mb-2 text-cyan-400" />
               <div class="text-sm text-gray-300">InfluxDB / Grafana</div>
             </div>
           </div>

@@ -1,5 +1,8 @@
 <template>
-  <div class="card group h-full flex flex-col">
+  <div class="card group h-full flex flex-col relative">
+    <div v-if="comingSoon" class="absolute top-4 right-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+      Coming Soon™
+    </div>
     <div class="flex items-center space-x-4 mb-4">
       <div
         class="w-12 h-12 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110"
@@ -34,6 +37,7 @@ interface Props {
   link: string
   features?: string[]
   variant?: 'primary' | 'secondary' | 'accent'
+  comingSoon?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
