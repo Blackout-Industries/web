@@ -8,7 +8,7 @@
             <!-- Orange glow -->
             <div class="absolute inset-0 bg-primary/20 rounded-lg blur-lg group-hover:bg-primary/30 transition-all"></div>
             <!-- Logo container -->
-            <div class="relative w-full h-full rounded-lg bg-gradient-to-br from-dark-200 to-dark flex items-center justify-center transition-all shadow-lg shadow-primary/10 group-hover:shadow-primary/20 overflow-hidden">
+            <div class="relative w-full h-full rounded-lg flex items-center justify-center transition-all overflow-hidden">
               <img
                 src="/logo.png"
                 alt="Blackout Industries"
