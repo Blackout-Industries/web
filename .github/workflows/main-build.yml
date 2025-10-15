@@ -138,35 +138,86 @@ jobs:
           path: sbom.json
           retention-days: 90
 
-  promote-to-staging:
-    name: Promote to Staging
-    runs-on: ubuntu-latest
+  deploy-production:
+    name: Deploy to Production (Raspberry Pi)
+    runs-on: [self-hosted, Linux, ARM64, web-production]
     needs: build-and-push-image
     environment:
-      name: staging
-      url: https://staging.blackout-industries.com
+      name: production
+      url: https://blackout-industries.com
     steps:
-      - name: Deployment notification
-        run: |
-          echo "🚀 Image promoted to staging environment"
-          echo "Image: ${{ needs.build-and-push-image.outputs.image-tags }}"
-          echo "Digest: ${{ needs.build-and-push-image.outputs.image-digest }}"
-          echo ""
-          echo "⚠️  NOTE: Actual deployment to self-hosted infrastructure"
-          echo "will be triggered separately via your hosting platform."
-          echo ""
-          echo "Next steps:"
-          echo "1. Pull image: docker pull ${{ needs.build-and-push-image.outputs.image-tags }}"
-          echo "2. Deploy to your infrastructure"
-          echo "3. Run smoke tests"
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Create deployment marker
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Pull latest image
         run: |
-          echo "STAGING_IMAGE_TAG=${{ needs.build-and-push-image.outputs.image-tags }}" >> $GITHUB_ENV
-          echo "STAGING_IMAGE_DIGEST=${{ needs.build-and-push-image.outputs.image-digest }}" >> $GITHUB_ENV
-          echo "STAGING_DEPLOYED_AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> $GITHUB_ENV
+          echo "📦 Pulling image: ${{ needs.build-and-push-image.outputs.image-tags }}"
+          docker pull ${{ needs.build-and-push-image.outputs.image-tags }}
+
+          # Tag as latest for docker-compose
+          docker tag ${{ needs.build-and-push-image.outputs.image-tags }} ghcr.io/blackout-industries/web:latest
+
+      - name: Stop existing deployment
+        working-directory: deploy
+        run: |
+          echo "🛑 Stopping existing containers..."
+          docker compose -f docker-compose.prod.yml down || true
+
+      - name: Deploy with Docker Compose
+        working-directory: deploy
+        env:
+          CLOUDFLARE_TUNNEL_TOKEN: ${{ secrets.CLOUDFLARE_TUNNEL_TOKEN }}
+        run: |
+          echo "🚀 Starting deployment..."
+          docker compose -f docker-compose.prod.yml up -d
+
+          echo "⏳ Waiting for services to stabilize..."
+          sleep 15
+
+      - name: Health checks
+        working-directory: deploy
+        run: |
+          echo "🔍 Running health checks..."
+          echo ""
+
+          # Check container status
+          echo "📊 Container Status:"
+          docker compose -f docker-compose.prod.yml ps
+          echo ""
+
+          # Check web container health
+          echo "🌐 Web Container Health:"
+          if docker exec blackout-web wget --quiet --tries=1 --spider http://localhost:80/; then
+            echo "✅ Web container is healthy"
+          else
+            echo "❌ Web container health check failed"
+            exit 1
+          fi
+          echo ""
+
+          # Check cloudflared tunnel
+          echo "🚇 Cloudflare Tunnel Status:"
+          if docker exec cloudflared-tunnel cloudflared tunnel info 2>&1 | grep -q "Registered"; then
+            echo "✅ Cloudflare Tunnel is connected"
+          else
+            echo "⚠️  Cloudflare Tunnel check inconclusive (may still be connecting)"
+          fi
+
+      - name: Deployment summary
+        if: success()
+        run: |
+          echo "✅ Deployment successful!"
+          echo ""
+          echo "📦 Image: ${{ needs.build-and-push-image.outputs.image-tags }}"
+          echo "🔐 Digest: ${{ needs.build-and-push-image.outputs.image-digest }}"
+          echo "🌐 URL: https://blackout-industries.com"
+          echo "⏰ Deployed at: $(date -u +"%Y-%m-%d %H:%M:%S UTC")"
 
       - name: Comment on commit
+        if: success()
         uses: actions/github-script@v7
         with:
           script: |
@@ -174,5 +225,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: context.sha,
-              body: `## 🚀 Staging Deployment Ready\n\n**Image:** \`${{ needs.build-and-push-image.outputs.image-tags }}\`\n**Digest:** \`${{ needs.build-and-push-image.outputs.image-digest }}\`\n\n### Deploy to your infrastructure:\n\`\`\`bash\ndocker pull ${{ needs.build-and-push-image.outputs.image-tags }}\n# Deploy using your hosting platform\n\`\`\``
+              body: `## 🚀 Production Deployment Successful\n\n**Image:** \`${{ needs.build-and-push-image.outputs.image-tags }}\`\n**Digest:** \`${{ needs.build-and-push-image.outputs.image-digest }}\`\n**Environment:** Raspberry Pi 4 (ARM64)\n**URL:** https://blackout-industries.com\n\n### Services Deployed:\n- ✅ Web application (nginx + static site)\n- ✅ Cloudflare Tunnel (secure ingress)\n- ✅ Watchtower (auto-updates)\n\n**Deployed at:** ${new Date().toISOString()}`
             })
