@@ -25,7 +25,7 @@
             K8s clusters that don't crash at 3am. Infrastructure as actual code. Game servers that ship. Hardware that works.
           </p>
           <div class="flex space-x-4">
-            <a href="https://github.com/blackoutindustries" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+            <a href="https://github.com/Blackout-Industries" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
               <Icon name="mdi:github" class="w-5 h-5" />
             </a>
             <a href="https://linkedin.com/company/blackout-industries" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">

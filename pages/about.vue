@@ -46,39 +46,39 @@
                 <div>
                   <h3 class="text-xl font-semibold mb-3 text-primary">Cloud & Infrastructure</h3>
                   <ul class="text-text-secondary space-y-2">
-                    <li>Azure (VMs, AKS, APIM, CosmosDB, KeyVaults)</li>
-                    <li>AWS (CDK, CodePipeline, multi-region)</li>
-                    <li>Oracle Cloud Infrastructure</li>
-                    <li>Kubernetes, Helm, Kustomize</li>
-                    <li>Cilium networking, Kong API Gateway</li>
+                    <li>Multi-cloud architecture (Azure, AWS, OCI, GCP)</li>
+                    <li>Container orchestration & service mesh</li>
+                    <li>API gateways & edge networking</li>
+                    <li>Managed databases & data platforms</li>
+                    <li>Secrets management & encryption</li>
                   </ul>
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold mb-3 text-secondary">Automation & DevOps</h3>
                   <ul class="text-text-secondary space-y-2">
-                    <li>GitOps with ArgoCD</li>
-                    <li>CI/CD (GitHub Actions, Azure DevOps, Octopus)</li>
-                    <li>Infrastructure as Code (Terraform, CDK, Ansible)</li>
-                    <li>KEDA event-driven autoscaling</li>
-                    <li>Kyverno policy enforcement</li>
+                    <li>GitOps workflows & declarative deployments</li>
+                    <li>CI/CD pipeline design & optimization</li>
+                    <li>Infrastructure as Code across platforms</li>
+                    <li>Event-driven autoscaling & serverless</li>
+                    <li>Policy enforcement & compliance automation</li>
                   </ul>
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold mb-3 text-accent">Observability & Data</h3>
                   <ul class="text-text-secondary space-y-2">
-                    <li>LGTM Stack (Loki, Grafana, Tempo, Mimir)</li>
-                    <li>CloudNativePG for PostgreSQL at scale</li>
-                    <li>Flyway database migrations</li>
-                    <li>Custom Slack bot integrations</li>
+                    <li>Metrics, logs, traces & alerting systems</li>
+                    <li>Database clustering & high availability</li>
+                    <li>Schema migration strategies</li>
+                    <li>Custom automation & integrations</li>
                   </ul>
                 </div>
                 <div>
                   <h3 class="text-xl font-semibold mb-3 text-primary-light">Security & Quality</h3>
                   <ul class="text-text-secondary space-y-2">
-                    <li>SonarQube code quality gates</li>
-                    <li>Kyverno compliance automation</li>
-                    <li>Selenium, Postman/Newman testing</li>
-                    <li>Multi-platform deployments</li>
+                    <li>Code quality gates & static analysis</li>
+                    <li>Security scanning & vulnerability management</li>
+                    <li>Automated testing & end-to-end validation</li>
+                    <li>Multi-platform delivery pipelines</li>
                   </ul>
                 </div>
               </div>

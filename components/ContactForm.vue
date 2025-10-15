@@ -148,26 +148,37 @@ const handleSubmit = async () => {
   error.value = ''
 
   try {
-    // Simulate form submission (replace with actual API call)
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    // Call Nuxt API route
+    const response = await $fetch('/api/contact', {
+      method: 'POST',
+      body: {
+        name: form.name,
+        email: form.email,
+        company: form.company,
+        service: form.service,
+        message: form.message,
+        honeypot: form.honeypot
+      }
+    })
 
-    // For Phase 1, just show success message
-    // In Phase 3, this would call a Nuxt API route
-    success.value = true
+    if (response.success) {
+      success.value = true
 
-    // Reset form
-    form.name = ''
-    form.email = ''
-    form.company = ''
-    form.service = ''
-    form.message = ''
+      // Reset form
+      form.name = ''
+      form.email = ''
+      form.company = ''
+      form.service = ''
+      form.message = ''
 
-    // Hide success message after 5 seconds
-    setTimeout(() => {
-      success.value = false
-    }, 5000)
-  } catch (err) {
-    error.value = 'Please try again later or contact us directly at offers.blackout.industries@proton.me'
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        success.value = false
+      }, 5000)
+    }
+  } catch (err: any) {
+    console.error('Contact form error:', err)
+    error.value = err.data?.message || 'Please try again later or contact us directly at offers.blackout.industries@proton.me'
   } finally {
     loading.value = false
   }

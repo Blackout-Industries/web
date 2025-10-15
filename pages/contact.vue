@@ -57,7 +57,7 @@
               <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
               <div class="flex space-x-4">
                 <a
-                  href="https://github.com/blackoutindustries"
+                  href="https://github.com/Blackout-Industries"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="flex items-center justify-center w-12 h-12 bg-dark-200 hover:bg-dark-300 border border-dark-300 hover:border-primary rounded-lg transition-all hover:scale-110"
