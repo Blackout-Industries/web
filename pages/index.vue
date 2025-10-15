@@ -222,29 +222,22 @@
         <!-- Classified Section -->
         <div class="mt-16 max-w-5xl mx-auto">
           <div class="card bg-dark-200 border-primary/20 relative overflow-hidden">
-            <!-- Military topographic map grid -->
-            <div class="absolute inset-0 opacity-5">
+            <!-- Simple tactical grid with dots and lines -->
+            <div class="absolute inset-0 opacity-50">
               <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
                 <defs>
-                  <!-- Subtle topographic contour pattern -->
-                  <pattern id="topo-pattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse">
-                    <!-- Isometric grid lines -->
-                    <path d="M 0,100 Q 50,80 100,100 T 200,100" fill="none" stroke="#FF6B00" stroke-width="0.3" opacity="0.4" />
-                    <path d="M 0,50 Q 50,30 100,50 T 200,50" fill="none" stroke="#FF6B00" stroke-width="0.2" opacity="0.3" />
-                    <path d="M 0,150 Q 50,130 100,150 T 200,150" fill="none" stroke="#FF6B00" stroke-width="0.2" opacity="0.3" />
-
-                    <!-- Vertical isometric lines -->
-                    <line x1="50" y1="0" x2="50" y2="200" stroke="#FF6B00" stroke-width="0.2" opacity="0.2" />
-                    <line x1="100" y1="0" x2="100" y2="200" stroke="#FF6B00" stroke-width="0.3" opacity="0.3" />
-                    <line x1="150" y1="0" x2="150" y2="200" stroke="#FF6B00" stroke-width="0.2" opacity="0.2" />
-
-                    <!-- Small elevation markers -->
-                    <text x="8" y="12" font-family="monospace" font-size="6" fill="#FF6B00" opacity="0.3">18T</text>
-                    <circle cx="105" cy="105" r="1" fill="#FF6B00" opacity="0.3" />
+                  <!-- Grid pattern with dots and lines -->
+                  <pattern id="tactical-grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <!-- Vertical line -->
+                    <line x1="0" y1="0" x2="0" y2="40" stroke="#FF6B00" stroke-width="0.5" opacity="0.4" />
+                    <!-- Horizontal line -->
+                    <line x1="0" y1="0" x2="40" y2="0" stroke="#FF6B00" stroke-width="0.5" opacity="0.4" />
+                    <!-- Dot at intersection -->
+                    <circle cx="0" cy="0" r="1.5" fill="#FF6B00" opacity="0.6" />
                   </pattern>
                 </defs>
 
-                <rect width="100%" height="100%" fill="url(#topo-pattern)" />
+                <rect width="100%" height="100%" fill="url(#tactical-grid)" />
               </svg>
             </div>
 
@@ -261,24 +254,24 @@
                     <span class="px-3 py-1 bg-primary/20 border border-primary/40 rounded text-xs font-mono uppercase tracking-wider text-primary">Restricted</span>
                   </div>
                   <p class="text-text-secondary text-lg mb-6">
-                    We don't talk about this work publicly. If you know, you know. NDA-covered projects for defense contractors, military systems, and things we legally can't mention on a website.
+                    NDA-covered projects for defense contractors, military systems, and things we legally can't mention on a website.
                   </p>
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6 text-sm">
                     <div class="flex items-center gap-2 text-text-tertiary">
                       <div class="w-1 h-1 bg-primary rounded-full"></div>
-                      <span class="font-mono">ITAR compliance ready</span>
+                      <span class="font-mono">Autonomous systems</span>
                     </div>
                     <div class="flex items-center gap-2 text-text-tertiary">
                       <div class="w-1 h-1 bg-primary rounded-full"></div>
-                      <span class="font-mono">Classified data handling</span>
+                      <span class="font-mono">Drone infrastructure</span>
                     </div>
                     <div class="flex items-center gap-2 text-text-tertiary">
                       <div class="w-1 h-1 bg-primary rounded-full"></div>
-                      <span class="font-mono">Secure communications</span>
+                      <span class="font-mono">Secure telemetry</span>
                     </div>
                     <div class="flex items-center gap-2 text-text-tertiary">
                       <div class="w-1 h-1 bg-primary rounded-full"></div>
-                      <span class="font-mono">Zero-trust architecture</span>
+                      <span class="font-mono">Air-gapped networks</span>
                     </div>
                   </div>
                   <NuxtLink to="/contact" class="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 hover:border-primary/50 rounded-lg transition-all text-primary font-medium">
@@ -305,7 +298,9 @@
             Why Us <span class="gradient-text">Over Them</span>
           </h2>
           <p class="text-lg text-text-secondary max-w-2xl mx-auto">
-            Because we've been on-call at 3am fixing someone else's mess. We know what breaks.
+            Because we've been on-call at 3am fixing someone else's mess.
+            <br>
+            We know what breaks.
           </p>
         </div>
 
@@ -347,7 +342,9 @@
               Tired of Infrastructure That Falls Over?
             </h2>
             <p class="text-lg text-text-secondary mb-8 max-w-2xl mx-auto">
-              Stop pretending YAML files are infrastructure. Let's build something that actually works.
+              Stop pretending YAML files are infrastructure.
+              <br>
+              Let's build something that actually works.
             </p>
             <NuxtLink to="/contact" class="btn btn-primary text-lg">
               Let's Talk

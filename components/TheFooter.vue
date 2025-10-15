@@ -22,7 +22,7 @@
             </span>
           </div>
           <p class="text-text-secondary max-w-md mb-4">
-            Engineering infrastructure that scales. DevOps consulting, IoT automation, game infrastructure, and precision 3D printing for modern teams.
+            K8s clusters that don't crash at 3am. Infrastructure as actual code. Game servers that ship. Hardware that works.
           </p>
           <div class="flex space-x-4">
             <a href="https://github.com/blackoutindustries" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">

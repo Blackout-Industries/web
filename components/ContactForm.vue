@@ -167,7 +167,7 @@ const handleSubmit = async () => {
       success.value = false
     }, 5000)
   } catch (err) {
-    error.value = 'Please try again later or contact us directly at hello@blackoutindustries.com'
+    error.value = 'Please try again later or contact us directly at offers.blackout.industries@proton.me'
   } finally {
     loading.value = false
   }

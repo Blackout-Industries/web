@@ -37,8 +37,8 @@
                   <Icon name="mdi:email" class="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                   <div>
                     <p class="font-medium text-text-primary">Email</p>
-                    <a href="mailto:hello@blackoutindustries.com" class="text-text-secondary hover:text-primary transition-colors">
-                      hello@blackoutindustries.com
+                    <a href="mailto:offers.blackout.industries@proton.me" class="text-text-secondary hover:text-primary transition-colors">
+                      offers.blackout.industries@proton.me
                     </a>
                   </div>
                 </div>

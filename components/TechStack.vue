@@ -26,11 +26,11 @@
           <span class="tech-label">Azure</span>
         </div>
 
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-red-500 to-red-600">
-            <Icon name="heroicons:cloud" class="w-8 h-8 text-white" />
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-blue-400 to-yellow-500 featured-glow">
+            <Icon name="simple-icons:python" class="w-8 h-8 text-white" />
           </div>
-          <span class="tech-label">GCP</span>
+          <span class="tech-label">Python</span>
         </div>
 
         <!-- Container & Orchestration -->
@@ -114,26 +114,26 @@
           <span class="tech-label">Grafana</span>
         </div>
 
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-purple-600 to-purple-800">
-            <Icon name="heroicons:chart-bar" class="w-8 h-8 text-white" />
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-yellow-400 to-orange-600 featured-glow">
+            <Icon name="heroicons:document-text" class="w-8 h-8 text-white" />
           </div>
-          <span class="tech-label">Datadog</span>
+          <span class="tech-label">Loki</span>
         </div>
 
         <!-- Security & Secrets -->
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-yellow-500 to-yellow-600">
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-yellow-500 to-yellow-600 featured-glow">
             <Icon name="heroicons:lock-closed" class="w-8 h-8 text-white" />
           </div>
           <span class="tech-label">Vault</span>
         </div>
 
-        <div class="tech-item group">
-          <div class="tech-icon-wrapper bg-gradient-to-br from-gray-600 to-gray-700">
-            <Icon name="heroicons:shield-check" class="w-8 h-8 text-white" />
+        <div class="tech-item group featured">
+          <div class="tech-icon-wrapper bg-gradient-to-br from-green-500 to-teal-600 featured-glow">
+            <Icon name="simple-icons:nginx" class="w-8 h-8 text-white" />
           </div>
-          <span class="tech-label">SOPS</span>
+          <span class="tech-label">NGINX</span>
         </div>
 
         <div class="tech-item group featured">
@@ -195,23 +195,23 @@
   @apply text-sm font-medium text-text-secondary group-hover:text-text-primary transition-colors duration-300;
 }
 
-/* Featured 2025 tools with animated glow */
+/* Featured 2025 tools with animated orange glow */
 .tech-item.featured .tech-icon-wrapper.featured-glow {
   position: relative;
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.3), 0 0 20px rgba(255, 107, 0, 0.15);
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
 .tech-item.featured:hover .tech-icon-wrapper.featured-glow {
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 15px rgba(255, 107, 0, 0.5), 0 0 30px rgba(255, 107, 0, 0.25);
 }
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 0 10px rgba(255, 107, 0, 0.3), 0 0 20px rgba(255, 107, 0, 0.15);
   }
   50% {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.7), 0 0 60px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 15px rgba(255, 107, 0, 0.4), 0 0 25px rgba(255, 107, 0, 0.2);
   }
 }
 </style>
