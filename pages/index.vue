@@ -152,10 +152,10 @@
       <div class="container-custom">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-5xl font-bold mb-4">
-            Our <span class="gradient-text">Services</span>
+            What We <span class="gradient-text">Actually Do</span>
           </h2>
           <p class="text-lg text-text-secondary max-w-2xl mx-auto">
-            From cloud infrastructure to smart homes, game backends to physical prototypes—we deliver precision at scale.
+            No fluff. No buzzwords. Just infrastructure that survives production.
           </p>
         </div>
 
@@ -163,58 +163,58 @@
           <ServiceCard
             icon="heroicons:server-stack"
             title="DevOps Consulting"
-            description="Build resilient, scalable infrastructure with expert guidance. From Kubernetes to CI/CD pipelines."
+            description="Stop firefighting. We build infrastructure that stays up when everyone else's goes down."
             link="/services/devops-consulting"
             variant="accent"
             :features="[
-              'Cloud infrastructure design',
-              'Kubernetes & containerization',
-              'CI/CD pipeline automation',
-              'Monitoring & observability'
+              'K8s that doesn\'t need babysitting',
+              'GitOps pipelines that work',
+              'Monitoring worth reading',
+              'IaC without the regret'
             ]"
           />
 
           <ServiceCard
             icon="heroicons:cube-transparent"
-            title="3D Printing Services"
-            description="Turn digital designs into physical reality. Rapid prototyping and custom manufacturing."
+            title="3D Printing"
+            description="Hardware prototypes that actually fit on the first try. No iterations, no BS."
             link="/services/3d-printing"
             variant="secondary"
             :features="[
-              'Rapid prototyping',
-              'Custom part manufacturing',
-              'CAD model optimization',
-              'Multi-material printing'
+              'Functional prototypes in days',
+              'Custom manufacturing runs',
+              'Models that don\'t fail mid-print',
+              'Multi-material when it matters'
             ]"
           />
 
           <ServiceCard
             icon="heroicons:home-modern"
             title="IoT & Home Automation"
-            description="Smart home solutions that integrate seamlessly. From concept to deployment."
+            description="Smart devices that don't phone home to China. Local-first, privacy-obsessed automation."
             link="/services/iot-home-automation"
             variant="primary"
             :coming-soon="true"
             :features="[
-              'Smart lighting & climate',
-              'Security & monitoring',
-              'Energy optimization',
-              'Privacy-first architecture'
+              'No cloud dependencies',
+              'Offline-first architecture',
+              'Edge compute that scales',
+              'Security without subscription fees'
             ]"
           />
 
           <ServiceCard
             icon="heroicons:puzzle-piece"
-            title="Game Development"
-            description="From indie prototypes to production multiplayer systems and game infrastructure."
+            title="Game Infrastructure"
+            description="Multiplayer backends that handle launch day. Not the week after when nobody cares."
             link="/services/game-development"
             variant="accent"
             :coming-soon="true"
             :features="[
-              'Multiplayer backends',
-              'Low-latency networking',
-              'Engine development',
-              'DevOps for game studios'
+              'Sub-50ms latency or we failed',
+              'Scales before your Reddit post',
+              'Netcode engineers can read',
+              'Zero-downtime deploys'
             ]"
           />
         </div>
@@ -229,10 +229,10 @@
       <div class="container-custom">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-5xl font-bold mb-4">
-            Why <span class="gradient-text">Blackout Industries</span>
+            Why Us <span class="gradient-text">Over Them</span>
           </h2>
           <p class="text-lg text-text-secondary max-w-2xl mx-auto">
-            We combine technical excellence with rapid execution to transform your vision into reality.
+            Because we've been on-call at 3am fixing someone else's mess. We know what breaks.
           </p>
         </div>
 
@@ -241,24 +241,24 @@
             <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center mx-auto mb-4">
               <Icon name="heroicons:sparkles" class="w-8 h-8 text-white" />
             </div>
-            <h3 class="text-xl font-bold mb-2">Technical Excellence</h3>
-            <p class="text-text-secondary">Deep expertise in cloud-native architectures and modern engineering practices.</p>
+            <h3 class="text-xl font-bold mb-2">Battle-Tested</h3>
+            <p class="text-text-secondary">We've survived production incidents you'll only read about on HackerNews. Your architecture won't be our learning experience.</p>
           </div>
 
           <div class="card text-center">
             <div class="w-16 h-16 bg-gradient-to-br from-accent to-primary-dark rounded-full flex items-center justify-center mx-auto mb-4">
               <Icon name="heroicons:rocket-launch" class="w-8 h-8 text-white" />
             </div>
-            <h3 class="text-xl font-bold mb-2">Rapid Execution</h3>
-            <p class="text-text-secondary">Deliver MVPs in weeks, not months. We move fast without compromising quality.</p>
+            <h3 class="text-xl font-bold mb-2">Ship or Die</h3>
+            <p class="text-text-secondary">MVPs in weeks, not sprints of planning meetings. We code first, document after it works, like everyone actually does.</p>
           </div>
 
           <div class="card text-center">
             <div class="w-16 h-16 bg-gradient-to-br from-secondary to-primary rounded-full flex items-center justify-center mx-auto mb-4">
               <Icon name="heroicons:hand-raised" class="w-8 h-8 text-white" />
             </div>
-            <h3 class="text-xl font-bold mb-2">End-to-End Support</h3>
-            <p class="text-text-secondary">From strategy to implementation and beyond—we're with you every step.</p>
+            <h3 class="text-xl font-bold mb-2">No Hand-Holding</h3>
+            <p class="text-text-secondary">We build it, document it, then hand you the keys. No vendor lock-in. No recurring "support contracts."</p>
           </div>
         </div>
       </div>
@@ -271,13 +271,13 @@
           <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 opacity-50"></div>
           <div class="relative z-10">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">
-              Ready to Transform Your Infrastructure?
+              Tired of Infrastructure That Falls Over?
             </h2>
             <p class="text-lg text-text-secondary mb-8 max-w-2xl mx-auto">
-              Let's discuss how we can help you build, scale, and optimize your systems.
+              Stop pretending YAML files are infrastructure. Let's build something that actually works.
             </p>
             <NuxtLink to="/contact" class="btn btn-primary text-lg">
-              Schedule a Consultation
+              Let's Talk
             </NuxtLink>
           </div>
         </div>
