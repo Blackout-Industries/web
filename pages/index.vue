@@ -128,7 +128,7 @@
             <span class="gradient-text block mt-2">That Scales</span>
           </h1>
           <p class="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto mb-8 text-balance">
-            Kubernetes, Terraform, CI/CD pipelines. IoT edge compute. Low-latency multiplayer backends. Rapid prototyping.
+            K8s clusters that don't crash at 3am. Infrastructure as actual code. Game servers that ship. Hardware that works.
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="#services" class="btn btn-primary text-lg">
@@ -294,7 +294,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Kubernetes, Terraform, CI/CD. IoT edge compute. Low-latency game backends. Rapid prototyping. Engineering infrastructure that scales.'
+      content: 'K8s clusters that don\'t crash at 3am. Infrastructure as actual code. Game servers that ship. Hardware that works.'
     }
   ]
 })
