@@ -224,57 +224,75 @@
           <div class="card bg-dark-200 border-primary/20 relative overflow-hidden">
             <!-- Military topographic map grid -->
             <div class="absolute inset-0 opacity-8">
-              <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                <!-- Grid lines (UTM/MGRS style) -->
-                <defs>
-                  <pattern id="military-grid" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                    <!-- Major grid lines -->
-                    <line x1="0" y1="0" x2="0" y2="100" stroke="#FF6B00" stroke-width="0.5" opacity="0.3" />
-                    <line x1="0" y1="0" x2="100" y2="0" stroke="#FF6B00" stroke-width="0.5" opacity="0.3" />
-                    <!-- Minor grid lines -->
-                    <line x1="25" y1="0" x2="25" y2="100" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
-                    <line x1="50" y1="0" x2="50" y2="100" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
-                    <line x1="75" y1="0" x2="75" y2="100" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
-                    <line x1="0" y1="25" x2="100" y2="25" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
-                    <line x1="0" y1="50" x2="100" y2="50" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
-                    <line x1="0" y1="75" x2="100" y2="75" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
-                    <!-- MGRS Grid Zone -->
-                    <text x="3" y="10" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.5" font-weight="bold">18T</text>
-                    <!-- 100km Square ID -->
-                    <text x="22" y="10" font-family="monospace" font-size="6" fill="#FF6B00" opacity="0.4">WL</text>
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#military-grid)" />
+              <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1200 400">
+                <!-- Non-repeating grid lines -->
+                <!-- Vertical major lines -->
+                <line x1="0" y1="0" x2="0" y2="400" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="200" y1="0" x2="200" y2="400" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="400" y1="0" x2="400" y2="400" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="600" y1="0" x2="600" y2="400" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="800" y1="0" x2="800" y2="400" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="1000" y1="0" x2="1000" y2="400" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="1200" y1="0" x2="1200" y2="400" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
 
-                <!-- MGRS Coordinates scattered -->
-                <text x="10%" y="15%" font-family="monospace" font-size="9" fill="#FF6B00" opacity="0.35">33U DQ</text>
-                <text x="85%" y="20%" font-family="monospace" font-size="9" fill="#FF6B00" opacity="0.35">11S ER</text>
-                <text x="15%" y="85%" font-family="monospace" font-size="9" fill="#FF6B00" opacity="0.35">17T FT</text>
+                <!-- Horizontal major lines -->
+                <line x1="0" y1="0" x2="1200" y2="0" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="0" y1="100" x2="1200" y2="100" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="0" y1="200" x2="1200" y2="200" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="0" y1="300" x2="1200" y2="300" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
+                <line x1="0" y1="400" x2="1200" y2="400" stroke="#FF6B00" stroke-width="0.8" opacity="0.3" />
 
-                <!-- Easting/Northing coordinates -->
-                <text x="30%" y="25%" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">345 678</text>
-                <text x="65%" y="45%" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">420 815</text>
-                <text x="25%" y="70%" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">892 234</text>
+                <!-- Vertical minor lines -->
+                <line x1="100" y1="0" x2="100" y2="400" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+                <line x1="300" y1="0" x2="300" y2="400" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+                <line x1="500" y1="0" x2="500" y2="400" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+                <line x1="700" y1="0" x2="700" y2="400" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+                <line x1="900" y1="0" x2="900" y2="400" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+                <line x1="1100" y1="0" x2="1100" y2="400" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+
+                <!-- Horizontal minor lines -->
+                <line x1="0" y1="50" x2="1200" y2="50" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+                <line x1="0" y1="150" x2="1200" y2="150" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+                <line x1="0" y1="250" x2="1200" y2="250" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+                <line x1="0" y1="350" x2="1200" y2="350" stroke="#FF6B00" stroke-width="0.4" opacity="0.15" />
+
+                <!-- MGRS Grid Zone labels at corners -->
+                <text x="15" y="25" font-family="monospace" font-size="11" fill="#FF6B00" opacity="0.5" font-weight="bold">18T WL</text>
+                <text x="1020" y="25" font-family="monospace" font-size="11" fill="#FF6B00" opacity="0.5" font-weight="bold">33U DQ</text>
+                <text x="15" y="380" font-family="monospace" font-size="11" fill="#FF6B00" opacity="0.5" font-weight="bold">11S ER</text>
+                <text x="1020" y="380" font-family="monospace" font-size="11" fill="#FF6B00" opacity="0.5" font-weight="bold">17T FT</text>
+
+                <!-- Easting/Northing coordinates at grid intersections -->
+                <text x="210" y="110" font-family="monospace" font-size="8" fill="#FF6B00" opacity="0.35">345 678</text>
+                <text x="610" y="210" font-family="monospace" font-size="8" fill="#FF6B00" opacity="0.35">420 815</text>
+                <text x="410" y="310" font-family="monospace" font-size="8" fill="#FF6B00" opacity="0.35">892 234</text>
+                <text x="810" y="160" font-family="monospace" font-size="8" fill="#FF6B00" opacity="0.35">156 942</text>
 
                 <!-- Elevation markers -->
-                <text x="55%" y="30%" font-family="monospace" font-size="6" fill="#FF6B00" opacity="0.25">+180m</text>
-                <text x="40%" y="60%" font-family="monospace" font-size="6" fill="#FF6B00" opacity="0.25">+245m</text>
+                <text x="520" y="80" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">+180m</text>
+                <text x="320" y="260" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">+245m</text>
+                <text x="920" y="120" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">+312m</text>
 
                 <!-- Bearing markers -->
-                <text x="75%" y="75%" font-family="monospace" font-size="6" fill="#FF6B00" opacity="0.25">045°</text>
-                <text x="20%" y="40%" font-family="monospace" font-size="6" fill="#FF6B00" opacity="0.25">270°</text>
+                <text x="710" y="340" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">045°</text>
+                <text x="150" y="180" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">270°</text>
+                <text x="550" y="350" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">135°</text>
 
-                <!-- Crosshairs and range markers -->
-                <circle cx="15%" cy="30%" r="3" fill="none" stroke="#FF6B00" stroke-width="0.5" opacity="0.2" />
-                <circle cx="85%" cy="70%" r="3" fill="none" stroke="#FF6B00" stroke-width="0.5" opacity="0.2" />
-                <line x1="15%" y1="25%" x2="15%" y2="35%" stroke="#FF6B00" stroke-width="0.3" opacity="0.2" />
-                <line x1="10%" y1="30%" x2="20%" y2="30%" stroke="#FF6B00" stroke-width="0.3" opacity="0.2" />
+                <!-- Crosshairs and tactical markers -->
+                <circle cx="250" cy="150" r="5" fill="none" stroke="#FF6B00" stroke-width="0.8" opacity="0.25" />
+                <line x1="250" y1="140" x2="250" y2="160" stroke="#FF6B00" stroke-width="0.5" opacity="0.25" />
+                <line x1="240" y1="150" x2="260" y2="150" stroke="#FF6B00" stroke-width="0.5" opacity="0.25" />
+
+                <circle cx="950" cy="280" r="5" fill="none" stroke="#FF6B00" stroke-width="0.8" opacity="0.25" />
+                <line x1="950" y1="270" x2="950" y2="290" stroke="#FF6B00" stroke-width="0.5" opacity="0.25" />
+                <line x1="940" y1="280" x2="960" y2="280" stroke="#FF6B00" stroke-width="0.5" opacity="0.25" />
 
                 <!-- Declination diagram (magnetic north indicator) -->
-                <g transform="translate(90%, 90%)">
-                  <line x1="0" y1="0" x2="0" y2="-15" stroke="#FF6B00" stroke-width="0.4" opacity="0.3" />
-                  <polygon points="0,-15 -2,-12 2,-12" fill="#FF6B00" opacity="0.3" />
-                  <text x="3" y="-5" font-family="monospace" font-size="5" fill="#FF6B00" opacity="0.25">MN</text>
+                <g transform="translate(1150, 370)">
+                  <line x1="0" y1="0" x2="0" y2="-20" stroke="#FF6B00" stroke-width="0.6" opacity="0.35" />
+                  <polygon points="0,-20 -3,-15 3,-15" fill="#FF6B00" opacity="0.35" />
+                  <text x="5" y="-8" font-family="monospace" font-size="7" fill="#FF6B00" opacity="0.3">MN</text>
+                  <text x="5" y="0" font-family="monospace" font-size="6" fill="#FF6B00" opacity="0.25">5.2°</text>
                 </g>
               </svg>
             </div>
