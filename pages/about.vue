@@ -29,7 +29,7 @@
                 Founded in May 2023, Blackout Industries s.r.o was born from a simple observation: too many organizations were trapped in legacy on-premise infrastructure, struggling with manual deployments, skyrocketing cloud costs, and systems that couldn't scale with their ambitions.
               </p>
               <p class="text-text-secondary text-lg leading-relaxed">
-                With over 5 years of hands-on experience transforming enterprise infrastructure at GlobalLogic Slovakia and delivering cloud-native solutions across Azure, AWS, and Oracle Cloud, we saw an opportunity to help teams ditch the chaos and embrace modern, resilient infrastructure. At the same time, we recognized the power of rapid prototyping through 3D printing—turning digital concepts into physical prototypes in hours, not weeks.
+                With over 10 years of hands-on DevOps and infrastructure engineering experience, transforming enterprise systems and delivering cloud-native solutions across Azure, AWS, and Oracle Cloud, we saw an opportunity to help teams ditch the chaos and embrace modern, resilient infrastructure. At the same time, we recognized the power of rapid prototyping through 3D printing—turning digital concepts into physical prototypes in hours, not weeks.
               </p>
             </div>
 
@@ -90,7 +90,7 @@
                 We don't believe in one-size-fits-all solutions or following trends blindly. Every engagement starts with understanding your constraints, your team's capabilities, and your business goals. Then we architect solutions that fit your unique context—whether that's a full cloud migration, CI/CD pipeline overhaul, or iterative infrastructure improvements.
               </p>
               <p class="text-text-secondary text-lg leading-relaxed">
-                With experience across confidential enterprise projects, multi-platform deployments (Microsoft Store, Chrome, Google Play, Apple Store), and complex Azure/AWS environments, we bring real-world battle scars and lessons learned. Technical rigor meets creative problem-solving—that's the Blackout Industries way.
+                With a decade of experience across enterprise projects, multi-platform deployments, and complex multi-cloud environments, we bring real-world expertise and lessons learned. Technical rigor meets creative problem-solving—that's the Blackout Industries way.
               </p>
             </div>
           </div>

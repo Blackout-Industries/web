@@ -174,10 +174,11 @@ jobs:
           CLOUDFLARE_TUNNEL_TOKEN: ${{ secrets.CLOUDFLARE_TUNNEL_TOKEN }}
         run: |
           echo "🚀 Starting deployment..."
+          export CLOUDFLARE_TUNNEL_TOKEN="${CLOUDFLARE_TUNNEL_TOKEN}"
           docker compose -f docker-compose.prod.yml up -d
 
           echo "⏳ Waiting for services to stabilize..."
-          sleep 15
+          sleep 30
 
       - name: Health checks
         working-directory: deploy
