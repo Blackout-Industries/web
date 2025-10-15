@@ -140,7 +140,7 @@ jobs:
 
   deploy-production:
     name: Deploy to Production (Raspberry Pi)
-    runs-on: [self-hosted, Linux, ARM64, web-production]
+    runs-on: [web, production]
     needs: build-and-push-image
     environment:
       name: production
