@@ -90,7 +90,7 @@
                   <span class="tech-badge">GCP</span>
                   <span class="tech-badge">Azure</span>
                   <span class="tech-badge">Terraform</span>
-                  <span class="tech-badge">Pulumi</span>
+                  <span class="tech-badge">Terraform CDK</span>
                   <span class="tech-badge">Cloudflare</span>
                 </div>
               </div>
