@@ -128,7 +128,7 @@
             <span class="gradient-text block mt-2">That Scales</span>
           </h1>
           <p class="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto mb-8 text-balance">
-            DevOps consulting, IoT automation, game infrastructure, and precision 3D printing for modern teams.
+            Kubernetes, Terraform, CI/CD pipelines. IoT edge compute. Low-latency multiplayer backends. Rapid prototyping.
           </p>
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="#services" class="btn btn-primary text-lg">
@@ -294,7 +294,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'DevOps consulting, platform engineering, IoT/home automation, game development, and 3D printing for modern teams. Engineering infrastructure that scales.'
+      content: 'Kubernetes, Terraform, CI/CD. IoT edge compute. Low-latency game backends. Rapid prototyping. Engineering infrastructure that scales.'
     }
   ]
 })
