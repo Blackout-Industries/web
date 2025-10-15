@@ -155,11 +155,12 @@ jobs:
 
       - name: Pull latest image
         run: |
-          echo "📦 Pulling image: ${{ needs.build-and-push-image.outputs.image-tags }}"
-          docker pull ${{ needs.build-and-push-image.outputs.image-tags }}
+          IMAGE_NAME="ghcr.io/blackout-industries/web:latest"
+          echo "📦 Pulling image: $IMAGE_NAME"
+          docker pull $IMAGE_NAME
 
-          # Tag as latest for docker-compose
-          docker tag ${{ needs.build-and-push-image.outputs.image-tags }} ghcr.io/blackout-industries/web:latest
+          echo "✅ Image pulled successfully"
+          docker images | grep blackout-industries/web
 
       - name: Stop existing deployment
         working-directory: deploy
