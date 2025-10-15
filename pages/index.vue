@@ -222,8 +222,36 @@
         <!-- Classified Section -->
         <div class="mt-16 max-w-5xl mx-auto">
           <div class="card bg-dark-200 border-primary/20 relative overflow-hidden">
-            <!-- Tactical grid overlay -->
-            <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(#FF6B00 1px, transparent 1px), linear-gradient(90deg, #FF6B00 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <!-- Military topographic map grid -->
+            <div class="absolute inset-0 opacity-8">
+              <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <!-- Grid lines (UTM/MGRS style) -->
+                <defs>
+                  <pattern id="military-grid" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                    <!-- Major grid lines -->
+                    <line x1="0" y1="0" x2="0" y2="100" stroke="#FF6B00" stroke-width="0.5" opacity="0.3" />
+                    <line x1="0" y1="0" x2="100" y2="0" stroke="#FF6B00" stroke-width="0.5" opacity="0.3" />
+                    <!-- Minor grid lines -->
+                    <line x1="25" y1="0" x2="25" y2="100" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
+                    <line x1="50" y1="0" x2="50" y2="100" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
+                    <line x1="75" y1="0" x2="75" y2="100" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
+                    <line x1="0" y1="25" x2="100" y2="25" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
+                    <line x1="0" y1="50" x2="100" y2="50" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
+                    <line x1="0" y1="75" x2="100" y2="75" stroke="#FF6B00" stroke-width="0.3" opacity="0.15" />
+                    <!-- Grid coordinates -->
+                    <text x="5" y="12" font-family="monospace" font-size="8" fill="#FF6B00" opacity="0.4">38N</text>
+                    <text x="5" y="95" font-family="monospace" font-size="8" fill="#FF6B00" opacity="0.4">37N</text>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#military-grid)" />
+
+                <!-- Crosshairs and range markers -->
+                <circle cx="15%" cy="30%" r="3" fill="none" stroke="#FF6B00" stroke-width="0.5" opacity="0.2" />
+                <circle cx="85%" cy="70%" r="3" fill="none" stroke="#FF6B00" stroke-width="0.5" opacity="0.2" />
+                <line x1="15%" y1="25%" x2="15%" y2="35%" stroke="#FF6B00" stroke-width="0.3" opacity="0.2" />
+                <line x1="10%" y1="30%" x2="20%" y2="30%" stroke="#FF6B00" stroke-width="0.3" opacity="0.2" />
+              </svg>
+            </div>
 
             <div class="relative z-10 p-8 md:p-12">
               <div class="flex items-start gap-6">
