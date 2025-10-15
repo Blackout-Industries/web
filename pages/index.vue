@@ -218,6 +218,56 @@
             ]"
           />
         </div>
+
+        <!-- Classified Section -->
+        <div class="mt-16 max-w-5xl mx-auto">
+          <div class="card bg-dark-200 border-primary/20 relative overflow-hidden">
+            <!-- Tactical grid overlay -->
+            <div class="absolute inset-0 opacity-5" style="background-image: linear-gradient(#FF6B00 1px, transparent 1px), linear-gradient(90deg, #FF6B00 1px, transparent 1px); background-size: 20px 20px;"></div>
+
+            <div class="relative z-10 p-8 md:p-12">
+              <div class="flex items-start gap-6">
+                <div class="flex-shrink-0">
+                  <div class="w-16 h-16 bg-gradient-to-br from-primary/20 to-primary-dark/20 rounded-lg flex items-center justify-center border border-primary/30">
+                    <Icon name="heroicons:shield-check" class="w-8 h-8 text-primary" />
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-3">
+                    <h3 class="text-2xl md:text-3xl font-bold">Defense & Classified Systems</h3>
+                    <span class="px-3 py-1 bg-primary/20 border border-primary/40 rounded text-xs font-mono uppercase tracking-wider text-primary">Restricted</span>
+                  </div>
+                  <p class="text-text-secondary text-lg mb-6">
+                    We don't talk about this work publicly. If you know, you know. NDA-covered projects for defense contractors, military systems, and things we legally can't mention on a website.
+                  </p>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6 text-sm">
+                    <div class="flex items-center gap-2 text-text-tertiary">
+                      <div class="w-1 h-1 bg-primary rounded-full"></div>
+                      <span class="font-mono">ITAR compliance ready</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-text-tertiary">
+                      <div class="w-1 h-1 bg-primary rounded-full"></div>
+                      <span class="font-mono">Classified data handling</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-text-tertiary">
+                      <div class="w-1 h-1 bg-primary rounded-full"></div>
+                      <span class="font-mono">Secure communications</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-text-tertiary">
+                      <div class="w-1 h-1 bg-primary rounded-full"></div>
+                      <span class="font-mono">Zero-trust architecture</span>
+                    </div>
+                  </div>
+                  <NuxtLink to="/contact" class="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 hover:bg-primary/20 border border-primary/30 hover:border-primary/50 rounded-lg transition-all text-primary font-medium">
+                    <Icon name="heroicons:lock-closed" class="w-5 h-5" />
+                    <span>Contact Us Directly</span>
+                    <Icon name="heroicons:arrow-right" class="w-4 h-4" />
+                  </NuxtLink>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
