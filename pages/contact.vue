@@ -12,96 +12,86 @@
             <span class="gradient-text block mt-2">Something Great</span>
           </h1>
           <p class="text-xl md:text-2xl text-text-secondary">
-            Tell us about your project—we'll get back within 24 hours.
+            Drop us a line—we'll get back within 24 hours.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Contact Form & Info -->
+    <!-- Email & Info -->
     <section class="section bg-dark-100">
       <div class="container-custom">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          <!-- Form -->
-          <div class="card">
-            <h2 class="text-2xl md:text-3xl font-bold mb-6">Send Us a Message</h2>
-            <ContactForm />
+        <div class="max-w-3xl mx-auto space-y-6">
+          <!-- Primary email CTA -->
+          <div class="card text-center">
+            <Icon name="mdi:email-outline" class="w-12 h-12 text-primary mx-auto mb-4" />
+            <h2 class="text-2xl md:text-3xl font-bold mb-2">Email Us Directly</h2>
+            <p class="text-text-secondary mb-6">
+              The fastest way to reach us. No forms, no friction.
+            </p>
+            <a
+              :href="`mailto:${email}?subject=${encodeURIComponent(defaultSubject)}`"
+              class="btn btn-primary text-lg inline-flex items-center gap-2"
+            >
+              <Icon name="mdi:send" class="w-5 h-5" />
+              <span>{{ email }}</span>
+            </a>
+            <p class="mt-4 text-sm text-text-tertiary">
+              <Icon name="mdi:clock-outline" class="w-4 h-4 inline-block align-text-bottom mr-1" />
+              We typically respond within 24 hours
+            </p>
           </div>
 
-          <!-- Contact Info -->
-          <div>
-            <div class="card mb-6">
-              <h3 class="text-xl font-bold mb-4">Get in Touch</h3>
-              <div class="space-y-4">
-                <div class="flex items-start space-x-3">
-                  <Icon name="mdi:email" class="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <p class="font-medium text-text-primary">Email</p>
-                    <a href="mailto:offers.blackout.industries@proton.me" class="text-text-secondary hover:text-primary transition-colors">
-                      offers.blackout.industries@proton.me
-                    </a>
-                  </div>
-                </div>
-
-                <div class="flex items-start space-x-3">
-                  <Icon name="mdi:clock" class="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <div>
-                    <p class="font-medium text-text-primary">Response Time</p>
-                    <p class="text-text-secondary">Within 24 hours</p>
-                  </div>
-                </div>
+          <!-- What to include -->
+          <div class="card bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
+            <div class="flex items-start space-x-3">
+              <Icon name="mdi:information" class="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+              <div>
+                <h3 class="font-bold text-text-primary mb-2">What to Include</h3>
+                <ul class="space-y-2 text-sm text-text-secondary">
+                  <li class="flex items-start space-x-2">
+                    <Icon name="mdi:check" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>Brief overview of your project or challenge</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <Icon name="mdi:check" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>Timeline and budget constraints (if any)</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <Icon name="mdi:check" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>Any specific requirements or questions</span>
+                  </li>
+                  <li class="flex items-start space-x-2">
+                    <Icon name="mdi:check" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
+                    <span>Best way to reach you</span>
+                  </li>
+                </ul>
               </div>
             </div>
+          </div>
 
-            <div class="card mb-6">
-              <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
-              <div class="flex space-x-4">
-                <a
-                  href="https://github.com/Blackout-Industries"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center justify-center w-12 h-12 bg-dark-200 hover:bg-dark-300 border border-dark-300 hover:border-primary rounded-lg transition-all hover:scale-110"
-                  aria-label="GitHub"
-                >
-                  <Icon name="mdi:github" class="w-6 h-6 text-text-secondary hover:text-primary" />
-                </a>
-                <a
-                  href="https://linkedin.com/company/blackout-industries"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="flex items-center justify-center w-12 h-12 bg-dark-200 hover:bg-dark-300 border border-dark-300 hover:border-primary rounded-lg transition-all hover:scale-110"
-                  aria-label="LinkedIn"
-                >
-                  <Icon name="mdi:linkedin" class="w-6 h-6 text-text-secondary hover:text-primary" />
-                </a>
-              </div>
-            </div>
-
-            <div class="card bg-gradient-to-br from-primary/10 to-secondary/10 border-primary/20">
-              <div class="flex items-start space-x-3">
-                <Icon name="mdi:information" class="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <h3 class="font-bold text-text-primary mb-2">What to Include</h3>
-                  <ul class="space-y-2 text-sm text-text-secondary">
-                    <li class="flex items-start space-x-2">
-                      <Icon name="mdi:check" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
-                      <span>Brief overview of your project or challenge</span>
-                    </li>
-                    <li class="flex items-start space-x-2">
-                      <Icon name="mdi:check" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
-                      <span>Timeline and budget constraints (if any)</span>
-                    </li>
-                    <li class="flex items-start space-x-2">
-                      <Icon name="mdi:check" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
-                      <span>Any specific requirements or questions</span>
-                    </li>
-                    <li class="flex items-start space-x-2">
-                      <Icon name="mdi:check" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5" />
-                      <span>Best way to reach you</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+          <!-- Social -->
+          <div class="card">
+            <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
+            <div class="flex space-x-4">
+              <a
+                href="https://github.com/Blackout-Industries"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-center w-12 h-12 bg-dark-200 hover:bg-dark-300 border border-dark-300 hover:border-primary rounded-lg transition-all hover:scale-110"
+                aria-label="GitHub"
+              >
+                <Icon name="mdi:github" class="w-6 h-6 text-text-secondary hover:text-primary" />
+              </a>
+              <a
+                href="https://linkedin.com/company/blackout-industries"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-center w-12 h-12 bg-dark-200 hover:bg-dark-300 border border-dark-300 hover:border-primary rounded-lg transition-all hover:scale-110"
+                aria-label="LinkedIn"
+              >
+                <Icon name="mdi:linkedin" class="w-6 h-6 text-text-secondary hover:text-primary" />
+              </a>
             </div>
           </div>
         </div>
@@ -164,12 +154,15 @@
 </template>
 
 <script setup lang="ts">
+const email = 'offers.blackout.industries@proton.me'
+const defaultSubject = 'Project inquiry'
+
 useHead({
   title: 'Contact - Blackout Industries',
   meta: [
     {
       name: 'description',
-      content: 'Get in touch with Blackout Industries. Tell us about your DevOps, platform engineering, or 3D printing project. We respond within 24 hours.'
+      content: 'Get in touch with Blackout Industries. Email us about your DevOps, platform engineering, or 3D printing project. We respond within 24 hours.'
     }
   ]
 })

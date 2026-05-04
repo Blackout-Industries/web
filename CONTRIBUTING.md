@@ -181,7 +181,6 @@ components/
   ├── TheHeader.vue          # Singleton (prefixed with The)
   ├── TheFooter.vue
   ├── ServiceCard.vue        # Multi-instance
-  ├── ContactForm.vue
   └── TechStack.vue
 
 pages/

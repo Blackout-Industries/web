@@ -69,7 +69,6 @@ docker compose up prod --build
 │   ├── TheHeader.vue         # Main navigation header
 │   ├── TheFooter.vue         # Site footer with links
 │   ├── ServiceCard.vue       # Service preview cards
-│   ├── ContactForm.vue       # Contact form component
 │   └── TechStack.vue         # Technology icons display
 ├── layouts/
 │   └── default.vue           # Default page layout
@@ -171,7 +170,7 @@ curl http://localhost
 See [.env.example](./.env.example) for all configurable options.
 
 Currently, no environment variables are required for the static site to function. Optional variables for future features:
-- `FORMSPREE_ENDPOINT` - Contact form backend integration
+
 - `GTM_ID` - Google Tag Manager for analytics
 
 ## Performance Metrics
@@ -232,7 +231,7 @@ Proprietary - Copyright 2025 Blackout Industries s.r.o. All rights reserved.
 ## Support & Contact
 
 - Website: [blackoutindustries.com](https://blackoutindustries.com)
-- Contact Form: [/contact](/contact)
+- Email: [offers.blackout.industries@proton.me](mailto:offers.blackout.industries@proton.me)
 - Company: Blackout Industries s.r.o, Czech Republic
 
 ---
