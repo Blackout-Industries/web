@@ -230,7 +230,7 @@ Proprietary - Copyright 2025 Blackout Industries s.r.o. All rights reserved.
 
 ## Support & Contact
 
-- Website: [blackoutindustries.com](https://blackoutindustries.com)
+- Website: [web.blackout.industries](https://web.blackout.industries)
 - Email: [offers.blackout.industries@proton.me](mailto:offers.blackout.industries@proton.me)
 - Company: Blackout Industries s.r.o, Czech Republic
 
