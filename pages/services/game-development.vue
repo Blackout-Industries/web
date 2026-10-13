@@ -1,317 +1,198 @@
 <template>
-  <div class="min-h-screen">
-    <!-- Hero Section -->
-    <section class="hero-gradient py-20 relative overflow-hidden">
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute inset-0 bg-gradient-to-br from-purple-500 via-pink-500 to-orange-500 animate-pulse"></div>
+  <div>
+    <PageHero
+      eyebrow="Game Development"
+      title="Games Built for"
+      highlight="Handheld PCs and Switch"
+      subtitle="We develop Windows and Linux games designed from the first prototype for Steam Deck, ROG Ally and Legion Go, with Nintendo Switch versions scoped inside the platform's budgets."
+    >
+      <NuxtLink to="/contact" class="btn btn-primary">Get in Touch</NuxtLink>
+      <a href="#platforms" class="btn btn-secondary">See Platforms</a>
+    </PageHero>
+
+    <PageSection
+      id="platforms"
+      :alt="true"
+      title="Target"
+      highlight="Platforms"
+      subtitle="One codebase, four power and thermal envelopes. We tune every build on the device."
+    >
+      <div class="grid md:grid-cols-2 gap-6 max-w-5xl">
+        <FeatureCard
+          v-for="platform in platforms"
+          :key="platform.title"
+          :title="platform.title"
+          :icon="platform.icon"
+          :description="platform.description"
+          :items="platform.items"
+        />
       </div>
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="max-w-4xl mx-auto text-center">
-          <Icon name="heroicons:puzzle-piece" class="w-20 h-20 mx-auto mb-6 text-purple-400" />
-          <h1 class="text-5xl md:text-6xl font-bold mb-6 gradient-text">
-            Game Development
-          </h1>
-          <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-            From indie prototypes to production-ready multiplayer systems. We build games, game engines, and backend infrastructure that scales.
-          </p>
+    </PageSection>
+
+    <PageSection
+      title="How We"
+      highlight="Build"
+      subtitle="Six practices, each with a bar we hold every build to."
+    >
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
+        <FeatureCard
+          v-for="practice in practices"
+          :key="practice.title"
+          :title="practice.title"
+          :icon="practice.icon"
+          :description="practice.description"
+          :items="practice.items"
+        />
+      </div>
+    </PageSection>
+
+    <PageSection :alt="true" title="From Prototype to" highlight="Release">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl">
+        <div v-for="(step, index) in steps" :key="step.title" class="card">
+          <div class="icon-tile font-mono font-bold mb-4">{{ index + 1 }}</div>
+          <h3 class="text-lg font-semibold mb-2">{{ step.title }}</h3>
+          <p class="text-text-secondary">{{ step.description }}</p>
         </div>
       </div>
-    </section>
+    </PageSection>
 
-    <!-- Services Grid -->
-    <section class="section bg-black">
-      <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold mb-12 text-center gradient-text">What We Do</h2>
-
-        <div class="grid md:grid-cols-3 gap-8 mb-16">
-          <div class="card group">
-            <Icon name="heroicons:cpu-chip" class="w-12 h-12 mb-4 text-cyan-400 group-hover:scale-110 transition-transform" />
-            <h3 class="text-xl font-semibold mb-3 text-white">Game Backend Systems</h3>
-            <p class="text-gray-400">Scalable multiplayer infrastructure, matchmaking, leaderboards, anti-cheat, and real-time game servers.</p>
-          </div>
-
-          <div class="card group">
-            <Icon name="heroicons:globe-alt" class="w-12 h-12 mb-4 text-green-400 group-hover:scale-110 transition-transform" />
-            <h3 class="text-xl font-semibold mb-3 text-white">Networking & Multiplayer</h3>
-            <p class="text-gray-400">Low-latency netcode, dedicated servers, peer-to-peer systems, and state synchronization.</p>
-          </div>
-
-          <div class="card group">
-            <Icon name="heroicons:wrench-screwdriver" class="w-12 h-12 mb-4 text-orange-400 group-hover:scale-110 transition-transform" />
-            <h3 class="text-xl font-semibold mb-3 text-white">Engine Development</h3>
-            <p class="text-gray-400">Custom engine features, tools, plugins, and performance optimization for Unity, Unreal, or custom engines.</p>
-          </div>
-
-          <div class="card group">
-            <Icon name="heroicons:server-stack" class="w-12 h-12 mb-4 text-purple-400 group-hover:scale-110 transition-transform" />
-            <h3 class="text-xl font-semibold mb-3 text-white">DevOps for Games</h3>
-            <p class="text-gray-400">CI/CD pipelines, automated testing, cloud deployment, and infrastructure as code for game studios.</p>
-          </div>
-
-          <div class="card group">
-            <Icon name="heroicons:chart-bar" class="w-12 h-12 mb-4 text-pink-400 group-hover:scale-110 transition-transform" />
-            <h3 class="text-xl font-semibold mb-3 text-white">Analytics & Telemetry</h3>
-            <p class="text-gray-400">Player behavior tracking, performance monitoring, crash reporting, and A/B testing systems.</p>
-          </div>
-
-          <div class="card group">
-            <Icon name="heroicons:shield-check" class="w-12 h-12 mb-4 text-blue-400 group-hover:scale-110 transition-transform" />
-            <h3 class="text-xl font-semibold mb-3 text-white">Game Security</h3>
-            <p class="text-gray-400">Anti-cheat implementation, server hardening, DDoS mitigation, and secure authentication systems.</p>
-          </div>
-        </div>
-
-        <!-- Tech Stack -->
-        <div class="card bg-gradient-to-br from-gray-900 to-gray-800 border-purple-500/30">
-          <h3 class="text-2xl font-semibold mb-6 text-center text-white">Technologies & Engines</h3>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            <div>
-              <Icon name="heroicons:puzzle-piece" class="w-10 h-10 mx-auto mb-2 text-purple-400" />
-              <div class="text-sm text-gray-300">Unity</div>
-            </div>
-            <div>
-              <Icon name="heroicons:cube" class="w-10 h-10 mx-auto mb-2 text-blue-400" />
-              <div class="text-sm text-gray-300">Unreal Engine</div>
-            </div>
-            <div>
-              <Icon name="heroicons:code-bracket-square" class="w-10 h-10 mx-auto mb-2 text-orange-400" />
-              <div class="text-sm text-gray-300">Rust / C++</div>
-            </div>
-            <div>
-              <Icon name="heroicons:server" class="w-10 h-10 mx-auto mb-2 text-green-400" />
-              <div class="text-sm text-gray-300">Node.js / Go</div>
-            </div>
-            <div>
-              <Icon name="heroicons:globe-alt" class="w-10 h-10 mx-auto mb-2 text-cyan-400" />
-              <div class="text-sm text-gray-300">WebGL / Three.js</div>
-            </div>
-            <div>
-              <Icon name="heroicons:signal" class="w-10 h-10 mx-auto mb-2 text-yellow-400" />
-              <div class="text-sm text-gray-300">Photon / Mirror</div>
-            </div>
-            <div>
-              <Icon name="heroicons:cloud" class="w-10 h-10 mx-auto mb-2 text-blue-500" />
-              <div class="text-sm text-gray-300">AWS GameLift</div>
-            </div>
-            <div>
-              <Icon name="heroicons:server-stack" class="w-10 h-10 mx-auto mb-2 text-indigo-400" />
-              <div class="text-sm text-gray-300">Docker / K8s</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Specializations -->
-    <section class="section bg-gradient-to-b from-black to-gray-900">
-      <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold mb-12 text-center gradient-text">Our Specializations</h2>
-
-        <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <div class="card border-l-4 border-cyan-500">
-            <h3 class="text-xl font-semibold mb-3 text-cyan-400">Multiplayer Architecture</h3>
-            <ul class="space-y-2 text-gray-400">
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Authoritative server design with client-side prediction</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Low-latency networking with UDP/QUIC protocols</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Region-based matchmaking and server scaling</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="card border-l-4 border-purple-500">
-            <h3 class="text-xl font-semibold mb-3 text-purple-400">Performance Optimization</h3>
-            <ul class="space-y-2 text-gray-400">
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Profiling and bottleneck identification</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Memory optimization and garbage collection tuning</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>GPU rendering optimization and shader work</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="card border-l-4 border-orange-500">
-            <h3 class="text-xl font-semibold mb-3 text-orange-400">Backend Services</h3>
-            <ul class="space-y-2 text-gray-400">
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Player accounts, inventory, and progression systems</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Matchmaking engines with skill-based rating</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Leaderboards, achievements, and social features</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="card border-l-4 border-pink-500">
-            <h3 class="text-xl font-semibold mb-3 text-pink-400">Tools & Automation</h3>
-            <ul class="space-y-2 text-gray-400">
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Custom Unity/Unreal editor tools and extensions</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Build automation and asset pipeline optimization</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <Icon name="heroicons:check-circle" class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                <span>Automated testing frameworks for game logic</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Project Examples -->
-    <section class="section bg-gray-900">
-      <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold mb-12 text-center gradient-text">Project Portfolio</h2>
-
-        <div class="space-y-6 max-w-4xl mx-auto relative">
-          <div class="absolute inset-0 backdrop-blur-sm bg-gray-900/60 z-10 flex items-center justify-center rounded-lg">
-            <div class="text-center">
-              <div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 mb-4">
-                Coming Soon
-              </div>
-              <p class="text-xl text-gray-300">Building our portfolio showcase</p>
-            </div>
-          </div>
-
-          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-purple-500/30 blur-sm">
-            <h3 class="text-xl font-semibold mb-2 text-white">Multiplayer FPS Backend</h3>
-            <p class="text-gray-400 mb-4">Scalable dedicated server infrastructure supporting 10,000+ concurrent players across 200+ game servers with real-time matchmaking.</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">Unity</span>
-              <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded text-sm">Kubernetes</span>
-              <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded text-sm">Go</span>
-              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">AWS GameLift</span>
-            </div>
-          </div>
-
-          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-cyan-500/30 blur-sm">
-            <h3 class="text-xl font-semibold mb-2 text-white">Browser-Based MMO</h3>
-            <p class="text-gray-400 mb-4">WebGL-based massively multiplayer game with custom engine, 500+ simultaneous players per server, and real-time chat system.</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded text-sm">Three.js</span>
-              <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded text-sm">Node.js</span>
-              <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">WebSockets</span>
-              <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded text-sm">Redis</span>
-            </div>
-          </div>
-
-          <div class="card bg-gradient-to-r from-gray-800 to-gray-900 border-orange-500/30 blur-sm">
-            <h3 class="text-xl font-semibold mb-2 text-white">Mobile Game CI/CD Pipeline</h3>
-            <p class="text-gray-400 mb-4">Automated build, test, and deployment system for Unity mobile game reducing release cycle from 2 weeks to 2 hours.</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-orange-500/20 text-orange-300 rounded text-sm">Unity</span>
-              <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded text-sm">GitHub Actions</span>
-              <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded text-sm">FastLane</span>
-              <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded text-sm">TestFlight</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Work With Us -->
-    <section class="section bg-gradient-to-b from-gray-900 to-black">
-      <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold mb-12 text-center gradient-text">Why Game Studios Choose Us</h2>
-
-        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Icon name="heroicons:bolt" class="w-8 h-8 text-white" />
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-white">Ship Faster</h3>
-            <p class="text-gray-400">We handle the backend complexity so your team can focus on gameplay.</p>
-          </div>
-
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Icon name="heroicons:arrow-trending-up" class="w-8 h-8 text-white" />
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-white">Scale Confidently</h3>
-            <p class="text-gray-400">Infrastructure that grows with your player base without breaking.</p>
-          </div>
-
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Icon name="heroicons:shield-check" class="w-8 h-8 text-white" />
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-white">Production Ready</h3>
-            <p class="text-gray-400">Battle-tested code with monitoring, logging, and disaster recovery.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="section bg-gradient-to-br from-purple-900/20 to-pink-900/20">
-      <div class="container mx-auto px-6 text-center">
-        <h2 class="text-4xl font-bold mb-6 gradient-text">Let's Build Something Epic</h2>
-        <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-          Whether you need backend infrastructure, multiplayer systems, or performance optimization - we've got you covered.
+    <PageSection title="Engines and" highlight="Tooling">
+      <div class="card max-w-3xl">
+        <p class="text-text-secondary">
+          We work in the engine and language each game calls for. Handheld work lives in the renderer, input and build layers, so the same practices apply across these stacks.
         </p>
-        <NuxtLink to="/contact" class="btn-primary inline-flex items-center gap-2">
-          Start Your Project
-          <Icon name="heroicons:arrow-right" class="w-5 h-5" />
-        </NuxtLink>
+        <div class="mt-4 flex flex-wrap gap-2">
+          <span v-for="tool in tooling" :key="tool" class="tag">{{ tool }}</span>
+        </div>
       </div>
-    </section>
+    </PageSection>
+
+    <PageSection :alt="true">
+      <div class="card max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-bold mb-3">Building for Handhelds Too?</h2>
+        <p class="text-text-secondary mb-6">
+          Publishers, platform partners and fellow developers: we are glad to compare notes.
+        </p>
+        <NuxtLink to="/contact" class="btn btn-primary">Get in Touch</NuxtLink>
+      </div>
+    </PageSection>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 useHead({
-  title: 'Game Development Services - Blackout Industries',
+  title: 'Game Development for Handheld PCs and Switch - Blackout Industries',
   meta: [
     {
       name: 'description',
-      content: 'Game backend development, multiplayer systems, DevOps for game studios. Unity, Unreal, custom engines. Scalable infrastructure for indie to AAA games.',
-    },
-  ],
+      content: 'Blackout Industries develops Windows and Linux games built for Steam Deck, ROG Ally, Legion Go and Nintendo Switch. Performance, battery and Deck Verified criteria tuned on the device.'
+    }
+  ]
 })
+
+const platforms = [
+  {
+    title: 'Steam Deck',
+    icon: 'heroicons:cpu-chip',
+    description: 'SteamOS on Linux, 1280x800 display. Native Linux build or the Windows build through Proton.',
+    items: [
+      'Built to meet Deck Verified criteria',
+      'Native Vulkan build, Proton as the fallback',
+      '30, 40 or 60 fps caps matched to the refresh rate'
+    ]
+  },
+  {
+    title: 'ROG Ally',
+    icon: 'heroicons:bolt',
+    description: 'Windows 11 handheld with a 1080p 120 Hz variable refresh panel.',
+    items: [
+      'Graphics presets from 720p to 1080p',
+      'Controller-first UI with Steam Input and XInput',
+      'Sustained performance at a fixed power limit'
+    ]
+  },
+  {
+    title: 'Legion Go',
+    icon: 'heroicons:squares-2x2',
+    description: 'Windows 11 handheld with a 2560x1600 144 Hz panel.',
+    items: [
+      'Resolution scaling that keeps text legible',
+      'Detachable controller and touch input paths',
+      'Thermal testing under sustained load'
+    ]
+  },
+  {
+    title: 'Nintendo Switch',
+    icon: 'heroicons:puzzle-piece',
+    description: "Separate handheld and docked performance profiles. Switch versions are scoped inside the platform's CPU, GPU and memory budgets from the start.",
+    items: [
+      'Budgets per mode, set before content lock',
+      'Dynamic resolution and load-time targets',
+      'Certification requirements tracked from the first milestone'
+    ]
+  }
+]
+
+const practices = [
+  {
+    title: 'Handheld-First Performance',
+    icon: 'heroicons:chart-bar',
+    description: 'We profile on the device from the first prototype: frame pacing, CPU and GPU budgets, and shader precompilation against first-run stutter. Our bar: the target frame rate holds in every profiled scene.'
+  },
+  {
+    title: 'Battery and Thermal Budgets',
+    icon: 'heroicons:fire',
+    description: 'We set a target frame rate at a fixed power limit, test at sustained clocks and measure battery runtime per scene. Our bar: the frame cap holds at the agreed power limit.'
+  },
+  {
+    title: 'Deck Verified by Design',
+    icon: 'heroicons:shield-check',
+    description: "We build against the Verified criteria on Valve's compatibility page from the start. Valve runs the review and assigns the final rating. Suspend and resume handling and cloud saves are Valve recommendations, not Verified criteria; we cover them too. Our bar: every criterion below passes on the device.",
+    items: [
+      'Steam Deck controls supported, with a default configuration that reaches all content',
+      'On-screen glyphs match the active input: Deck, Steam Controller or Xbox',
+      'On-screen keyboard opens for controller players wherever text entry is needed',
+      'Supported resolution, 1280x800 preferred or 1280x720; smallest text at least 9 px at 1280x800, 12 px recommended',
+      'Default configuration playable at 30 fps at 800p',
+      'Any launcher fully navigable with a controller',
+      'Native Linux build, or the Windows build running through Proton'
+    ]
+  },
+  {
+    title: 'Native Linux and Proton',
+    icon: 'lucide:container',
+    description: 'We ship a native Vulkan and SDL build on the Steam Linux Runtime and validate the Windows build on Proton stable and Experimental as the fallback. Anti-cheat and middleware are checked before they go in. Our bar: the game runs on SteamOS without workarounds.'
+  },
+  {
+    title: 'Windows Handheld Integration',
+    icon: 'heroicons:signal',
+    description: 'Our Windows builds carry graphics presets from 720p to 1600p, variable refresh, Steam Input and XInput, with suspend and resume handled as best practice. Our bar: each preset holds its frame target on ROG Ally and Legion Go.'
+  },
+  {
+    title: 'Build Pipeline',
+    icon: 'heroicons:server-stack',
+    description: 'Windows and Linux CI builds every change, SteamPipe depots carry every release, and each upload is smoke tested on the device first. Our bar: every upload passes a device smoke test.'
+  }
+]
+
+const steps = [
+  {
+    title: 'Prototype on the Device',
+    description: 'We prototype on each target handheld from day one, so frame time, power and input problems surface before content is locked.'
+  },
+  {
+    title: 'Set the Budgets',
+    description: 'We set frame rate, power and memory budgets per device, plus the Verified criteria every build has to meet.'
+  },
+  {
+    title: 'Tune Every Milestone',
+    description: 'We profile every milestone build on the device and fix the most expensive problems first.'
+  },
+  {
+    title: 'Verify Before Release',
+    description: 'We check every release candidate on the device against the Verified criteria and our own budgets before it ships.'
+  }
+]
+
+const tooling = ['Unity', 'Unreal Engine', 'C++', 'Rust', 'Vulkan', 'SDL', 'Proton', 'Steamworks']
 </script>
-
-<style scoped>
-.hero-gradient {
-  background: linear-gradient(135deg, #0a0a0a 0%, #2e1a3e 50%, #0a0a0a 100%);
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f97316 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.card {
-  @apply bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300;
-}
-
-.btn-primary {
-  @apply bg-gradient-to-r from-purple-500 to-pink-600 text-white font-semibold px-8 py-3 rounded-lg hover:from-purple-600 hover:to-pink-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/50;
-}
-</style>

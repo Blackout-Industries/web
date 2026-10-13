@@ -20,6 +20,27 @@ const mountComponent = () => {
   })
 }
 
+const expectedTechs: Array<[string, string]> = [
+  ['AWS', 'heroicons:cloud'],
+  ['Azure', 'heroicons:cloud'],
+  ['Python', 'simple-icons:python'],
+  ['Docker', 'simple-icons:docker'],
+  ['Kubernetes', 'simple-icons:kubernetes'],
+  ['Helm', 'lucide:container'],
+  ['Terraform CDK', 'simple-icons:terraform'],
+  ['Ansible', 'simple-icons:ansible'],
+  ['Crossplane', 'heroicons:puzzle-piece'],
+  ['GitHub Actions', 'simple-icons:githubactions'],
+  ['GitLab CI', 'simple-icons:gitlab'],
+  ['Backstage', 'heroicons:building-office-2'],
+  ['Prometheus', 'simple-icons:prometheus'],
+  ['Grafana', 'simple-icons:grafana'],
+  ['Loki', 'heroicons:document-text'],
+  ['Vault', 'heroicons:lock-closed'],
+  ['NGINX', 'simple-icons:nginx'],
+  ['ArgoCD', 'lucide:server']
+]
+
 describe('TechStack', () => {
   describe('Section Structure', () => {
     it('renders main heading', () => {
@@ -38,12 +59,12 @@ describe('TechStack', () => {
   })
 
   describe('Technology Icons Grid', () => {
-    it('renders all cloud provider icons', () => {
+    it('renders cloud providers and languages', () => {
       const wrapper = mountComponent()
 
       expect(wrapper.text()).toContain('AWS')
       expect(wrapper.text()).toContain('Azure')
-      expect(wrapper.text()).toContain('GCP')
+      expect(wrapper.text()).toContain('Python')
     })
 
     it('renders container and orchestration technologies', () => {
@@ -57,17 +78,17 @@ describe('TechStack', () => {
     it('renders IaC and configuration tools', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Terraform')
+      expect(wrapper.text()).toContain('Terraform CDK')
       expect(wrapper.text()).toContain('Ansible')
-      expect(wrapper.text()).toContain('Pulumi')
+      expect(wrapper.text()).toContain('Crossplane')
     })
 
-    it('renders CI/CD platforms', () => {
+    it('renders CI/CD and platform tools', () => {
       const wrapper = mountComponent()
 
       expect(wrapper.text()).toContain('GitHub Actions')
       expect(wrapper.text()).toContain('GitLab CI')
-      expect(wrapper.text()).toContain('Jenkins')
+      expect(wrapper.text()).toContain('Backstage')
     })
 
     it('renders monitoring and observability tools', () => {
@@ -75,14 +96,14 @@ describe('TechStack', () => {
 
       expect(wrapper.text()).toContain('Prometheus')
       expect(wrapper.text()).toContain('Grafana')
-      expect(wrapper.text()).toContain('Datadog')
+      expect(wrapper.text()).toContain('Loki')
     })
 
-    it('renders security and secrets management tools', () => {
+    it('renders security, networking and delivery tools', () => {
       const wrapper = mountComponent()
 
       expect(wrapper.text()).toContain('Vault')
-      expect(wrapper.text()).toContain('SOPS')
+      expect(wrapper.text()).toContain('NGINX')
       expect(wrapper.text()).toContain('ArgoCD')
     })
 
@@ -93,69 +114,32 @@ describe('TechStack', () => {
       expect(techItems.length).toBe(18)
     })
 
+    it('renders every label in order', () => {
+      const wrapper = mountComponent()
+
+      const labels = wrapper.findAll('.tech-label').map(label => label.text())
+      expect(labels).toEqual(expectedTechs.map(([label]) => label))
+    })
+
     it('each tech item has icon and label', () => {
       const wrapper = mountComponent()
 
       const techItems = wrapper.findAll('.tech-item')
 
       techItems.forEach(item => {
-        expect(item.find('.tech-icon-wrapper').exists()).toBe(true)
-        expect(item.find('.tech-label').exists()).toBe(true)
+        expect(item.findComponent(Icon).exists()).toBe(true)
+        expect(item.find('.tech-label').text().length).toBeGreaterThan(0)
       })
     })
-  })
 
-  describe('Technology Categories', () => {
-    it('renders four category cards', () => {
+    it('each tech item uses the expected icon', () => {
       const wrapper = mountComponent()
 
-      const categoryCards = wrapper.findAll('.glass.rounded-lg.p-6')
-      expect(categoryCards.length).toBe(4)
-    })
-
-    it('renders Infrastructure category', () => {
-      const wrapper = mountComponent()
-
-      expect(wrapper.text()).toContain('Infrastructure')
-      expect(wrapper.text()).toContain('Cloud-native architectures')
-    })
-
-    it('renders Orchestration category', () => {
-      const wrapper = mountComponent()
-
-      expect(wrapper.text()).toContain('Orchestration')
-      expect(wrapper.text()).toContain('Container management')
-    })
-
-    it('renders Observability category', () => {
-      const wrapper = mountComponent()
-
-      expect(wrapper.text()).toContain('Observability')
-      expect(wrapper.text()).toContain('Metrics & monitoring')
-    })
-
-    it('renders Security category', () => {
-      const wrapper = mountComponent()
-
-      expect(wrapper.text()).toContain('Security')
-      expect(wrapper.text()).toContain('Compliance & secrets')
-    })
-
-    it('each category has icon and description', () => {
-      const wrapper = mountComponent()
-
-      const categoryCards = wrapper.findAll('.glass.rounded-lg.p-6')
-
-      categoryCards.forEach(card => {
-        const icons = card.findAllComponents(Icon)
-        expect(icons.length).toBeGreaterThan(0)
-
-        const heading = card.find('h3')
-        expect(heading.exists()).toBe(true)
-
-        const description = card.find('p')
-        expect(description.exists()).toBe(true)
-      })
+      const pairs = wrapper.findAll('.tech-item').map(item => [
+        item.find('.tech-label').text(),
+        item.findComponent(Icon).props('name')
+      ])
+      expect(pairs).toEqual(expectedTechs)
     })
   })
 
@@ -172,36 +156,22 @@ describe('TechStack', () => {
       const grid = wrapper.find('.grid.grid-cols-2.md\\:grid-cols-3.lg\\:grid-cols-6')
       expect(grid.exists()).toBe(true)
     })
-
-    it('tech items have group class for hover effects', () => {
-      const wrapper = mountComponent()
-
-      const techItems = wrapper.findAll('.tech-item.group')
-      expect(techItems.length).toBe(18)
-    })
-
-    it('category cards have responsive grid', () => {
-      const wrapper = mountComponent()
-
-      const categoryGrid = wrapper.find('.grid.grid-cols-1.md\\:grid-cols-4')
-      expect(categoryGrid.exists()).toBe(true)
-    })
   })
 
   describe('Visual Hierarchy', () => {
-    it('main heading uses gradient text', () => {
+    it('main heading highlights Modern Tech', () => {
       const wrapper = mountComponent()
 
-      const gradientText = wrapper.find('.gradient-text')
-      expect(gradientText.exists()).toBe(true)
-      expect(gradientText.text()).toBe('Modern Tech')
+      const heading = wrapper.find('h2')
+      expect(heading.text()).toContain('Powered By')
+      expect(heading.find('span').text()).toBe('Modern Tech')
     })
 
-    it('section has background styling', () => {
+    it('root is a semantic section with the tech-stack class', () => {
       const wrapper = mountComponent()
 
-      const section = wrapper.find('.bg-dark-100')
-      expect(section.exists()).toBe(true)
+      expect(wrapper.element.tagName).toBe('SECTION')
+      expect(wrapper.classes()).toContain('tech-stack')
     })
   })
 })

@@ -2,6 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
 import DevOpsPage from '../../../pages/services/devops-consulting.vue'
+import PageHero from '../../../components/PageHero.vue'
+import PageSection from '../../../components/PageSection.vue'
+import FeatureCard from '../../../components/FeatureCard.vue'
 
 // Mock Icon component
 const Icon = defineComponent({
@@ -21,7 +24,7 @@ const NuxtLink = defineComponent({
 const mountComponent = () => {
   return mount(DevOpsPage, {
     global: {
-      components: { Icon, NuxtLink },
+      components: { Icon, NuxtLink, PageHero, PageSection, FeatureCard },
       stubs: { Icon, NuxtLink },
       mocks: {
         useHead: () => {}
@@ -29,6 +32,25 @@ const mountComponent = () => {
     }
   })
 }
+
+const findSection = (wrapper: ReturnType<typeof mountComponent>, title: string) =>
+  wrapper.findAllComponents(PageSection).find(section => section.props('title') === title)
+
+const painPointTitles = [
+  'Slow Deployment Cycles',
+  'Cloud Cost Overruns',
+  'Lack of Observability',
+  'Manual, Error-Prone Processes'
+]
+
+const expertiseTitles = [
+  'Cloud Infrastructure Design',
+  'Kubernetes & Containerization',
+  'CI/CD Pipelines',
+  'Monitoring & Observability',
+  'Security & Compliance',
+  'Networking & Service Mesh'
+]
 
 describe('DevOps Consulting Page (services/devops-consulting.vue)', () => {
   describe('Hero Section', () => {
@@ -51,11 +73,13 @@ describe('DevOps Consulting Page (services/devops-consulting.vue)', () => {
       expect(wrapper.text()).toContain('Build resilient, scalable infrastructure')
     })
 
-    it('badge has icon and styling', () => {
+    it('renders the hero through PageHero with its eyebrow', () => {
       const wrapper = mountComponent()
 
-      const badge = wrapper.find('.bg-accent\\/20.border-accent\\/50')
-      expect(badge.exists()).toBe(true)
+      const hero = wrapper.findComponent(PageHero)
+      expect(hero.exists()).toBe(true)
+      expect(hero.props('eyebrow')).toBe('DevOps & Platform Engineering')
+      expect(hero.props('highlight')).toBe('That Powers Growth')
     })
   })
 
@@ -70,10 +94,9 @@ describe('DevOps Consulting Page (services/devops-consulting.vue)', () => {
     it('renders four main pain points', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Slow Deployment Cycles')
-      expect(wrapper.text()).toContain('Cloud Cost Overruns')
-      expect(wrapper.text()).toContain('Lack of Observability')
-      expect(wrapper.text()).toContain('Manual, Error-Prone Processes')
+      painPointTitles.forEach(title => {
+        expect(wrapper.text()).toContain(title)
+      })
     })
 
     it('pain points have descriptions', () => {
@@ -100,11 +123,14 @@ describe('DevOps Consulting Page (services/devops-consulting.vue)', () => {
       expect(painPointIcons.length).toBe(4)
     })
 
-    it('pain points are in responsive grid', () => {
+    it('renders the pain points as four FeatureCards', () => {
       const wrapper = mountComponent()
 
-      const grid = wrapper.find('.grid.grid-cols-1.md\\:grid-cols-2')
-      expect(grid.exists()).toBe(true)
+      const section = findSection(wrapper, 'Challenges We')
+      expect(section).toBeDefined()
+
+      const cards = section!.findAllComponents(FeatureCard)
+      expect(cards.map(card => card.props('title'))).toEqual(painPointTitles)
     })
   })
 
@@ -116,44 +142,48 @@ describe('DevOps Consulting Page (services/devops-consulting.vue)', () => {
       expect(wrapper.text()).toContain('Expertise')
     })
 
-    it('has multiple service category cards', () => {
+    it('renders ten FeatureCards across pain points and expertise', () => {
       const wrapper = mountComponent()
 
-      const cards = wrapper.findAll('.card')
-      expect(cards.length).toBeGreaterThanOrEqual(6)
+      expect(wrapper.findAllComponents(FeatureCard).length).toBe(10)
     })
 
-    it('renders service categories with headings', () => {
+    it('renders the six expertise areas as card headings', () => {
       const wrapper = mountComponent()
 
-      const headings = wrapper.findAll('h3.text-2xl')
-      expect(headings.length).toBeGreaterThanOrEqual(6)
+      const section = findSection(wrapper, 'Our')
+      expect(section).toBeDefined()
+
+      const headings = section!.findAll('h3').map(heading => heading.text())
+      expect(headings).toEqual(expertiseTitles)
     })
 
-    it('each service card has checkmark lists', () => {
+    it('every expertise card carries a description and technology tags', () => {
       const wrapper = mountComponent()
 
-      const checkIcons = wrapper.findAllComponents(Icon).filter(icon =>
-        icon.props('name') === 'heroicons:check-circle'
-      )
-
-      expect(checkIcons.length).toBeGreaterThan(20)
+      const cards = findSection(wrapper, 'Our')!.findAllComponents(FeatureCard)
+      expect(cards.length).toBe(6)
+      cards.forEach(card => {
+        expect(card.props('description').length).toBeGreaterThan(20)
+        expect(card.props('tags').length).toBeGreaterThanOrEqual(5)
+      })
     })
   })
 
   describe('Technologies Section', () => {
-    it('renders technologies section', () => {
+    it('renders one tag per technology', () => {
       const wrapper = mountComponent()
 
-      const sections = wrapper.findAll('section')
-      expect(sections.length).toBeGreaterThanOrEqual(4)
+      expect(wrapper.findAll('.tag').length).toBe(31)
     })
 
-    it('displays multiple technology badges', () => {
+    it('displays the key technologies', () => {
       const wrapper = mountComponent()
 
-      const badgeElements = wrapper.findAll('.inline-flex.items-center.space-x-2')
-      expect(badgeElements.length).toBeGreaterThan(15)
+      const tags = wrapper.findAll('.tag').map(tag => tag.text())
+      ;['Terraform CDK', 'Kubernetes', 'ArgoCD', 'GitHub Actions', 'OpenTelemetry', 'Vault', 'Linkerd'].forEach(tech => {
+        expect(tags).toContain(tech)
+      })
     })
   })
 
@@ -165,11 +195,14 @@ describe('DevOps Consulting Page (services/devops-consulting.vue)', () => {
       expect(links.length).toBeGreaterThan(0)
     })
 
-    it('has glass card styling for CTA', () => {
+    it('CTA has heading, copy and a Get Started link to contact', () => {
       const wrapper = mountComponent()
 
-      const glassCards = wrapper.findAll('.card.glass')
-      expect(glassCards.length).toBeGreaterThan(0)
+      expect(wrapper.text()).toContain("Let's Discuss Your Infrastructure Needs")
+      expect(wrapper.text()).toContain('Schedule a consultation to explore how we can optimize your DevOps workflows.')
+
+      const cta = wrapper.findAll('a[href="/contact"]').find(link => link.text() === 'Get Started')
+      expect(cta).toBeDefined()
     })
   })
 
@@ -186,13 +219,14 @@ describe('DevOps Consulting Page (services/devops-consulting.vue)', () => {
 
       const headings = wrapper.findAll('h1, h2, h3')
       expect(headings.length).toBeGreaterThanOrEqual(10)
+      expect(wrapper.findAll('h1').length).toBe(1)
     })
 
     it('sections alternate backgrounds', () => {
       const wrapper = mountComponent()
 
-      const darkSections = wrapper.findAll('.bg-dark-100')
-      expect(darkSections.length).toBeGreaterThan(0)
+      const altFlags = wrapper.findAllComponents(PageSection).map(section => section.props('alt'))
+      expect(altFlags).toEqual([true, false, true])
     })
   })
 
@@ -208,8 +242,16 @@ describe('DevOps Consulting Page (services/devops-consulting.vue)', () => {
     it('descriptions are informative', () => {
       const wrapper = mountComponent()
 
-      const descriptions = wrapper.findAll('.text-text-secondary')
-      expect(descriptions.length).toBeGreaterThan(10)
+      const cards = wrapper.findAllComponents(FeatureCard)
+      cards.forEach(card => {
+        expect(card.props('description').length).toBeGreaterThan(20)
+      })
+    })
+
+    it('renders ASCII-only text', () => {
+      const wrapper = mountComponent()
+
+      expect(/[^\x00-\x7F]/.test(wrapper.text())).toBe(false)
     })
   })
 })

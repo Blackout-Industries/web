@@ -1,219 +1,59 @@
 <template>
   <div>
-    <!-- Hero -->
-    <section class="relative py-20 md:py-32 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-100 to-dark opacity-90"></div>
-      <div class="absolute inset-0 bg-gradient-to-br from-secondary/20 to-primary/20 opacity-30"></div>
+    <PageHero
+      eyebrow="3D Printing Services"
+      title="Precision 3D Printing for"
+      highlight="Prototypes & Production"
+      subtitle="From concept to physical product - fast, accurate, reliable."
+    />
 
-      <div class="container-custom relative z-10">
-        <div class="max-w-4xl mx-auto text-center">
-          <div class="inline-flex items-center space-x-2 px-4 py-2 bg-secondary/20 border border-secondary/50 rounded-full text-secondary mb-6">
-            <Icon name="heroicons:cube-transparent" class="w-5 h-5" />
-            <span class="text-sm font-medium">3D Printing Services</span>
-          </div>
-          <h1 class="text-4xl md:text-6xl font-bold mb-6">
-            Precision 3D Printing for
-            <span class="gradient-text block mt-2">Prototypes & Production</span>
-          </h1>
-          <p class="text-xl md:text-2xl text-text-secondary">
-            From concept to physical product—fast, accurate, reliable.
-          </p>
-        </div>
+    <PageSection :alt="true" title="What We" highlight="Offer">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
+        <FeatureCard
+          v-for="offer in offers"
+          :key="offer.title"
+          :title="offer.title"
+          :icon="offer.icon"
+          :description="offer.description"
+          :items="offer.items"
+          :badge="offer.badge"
+        />
       </div>
-    </section>
+    </PageSection>
 
-    <!-- Service Details -->
-    <section class="section bg-dark-100">
-      <div class="container-custom">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-5xl font-bold mb-4">
-            What We <span class="gradient-text">Offer</span>
-          </h2>
-        </div>
-
-        <div class="space-y-8 max-w-5xl mx-auto">
-          <div class="card">
-            <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-secondary to-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Icon name="heroicons:bolt" class="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 class="text-2xl font-bold mb-2">Rapid Prototyping</h3>
-                <p class="text-text-secondary mb-3">Quick turnaround for concept validation and iterative design support. Get your prototypes in days, not weeks. Perfect for validating designs before committing to expensive tooling.</p>
-                <ul class="space-y-2">
-                  <li class="flex items-start space-x-2 text-sm text-text-secondary">
-                    <Icon name="heroicons:check-circle" class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                    <span>Functional prototypes for testing and validation</span>
-                  </li>
-                  <li class="flex items-start space-x-2 text-sm text-text-secondary">
-                    <Icon name="heroicons:check-circle" class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                    <span>Iterative design refinement with fast feedback loops</span>
-                  </li>
-                  <li class="flex items-start space-x-2 text-sm text-text-secondary">
-                    <Icon name="heroicons:check-circle" class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                    <span>Fast turnaround times (2-5 business days)</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="card relative">
-            <div class="absolute top-4 right-4 bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-              Coming Soon™
-            </div>
-            <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center flex-shrink-0">
-                <Icon name="lucide:box" class="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 class="text-2xl font-bold mb-2">Custom Manufacturing</h3>
-                <p class="text-text-secondary mb-3">Small to medium batch production with a wide range of materials and finishing options. From one-offs to production runs, we handle manufacturing at any scale.</p>
-                <ul class="space-y-2">
-                  <li class="flex items-start space-x-2 text-sm text-text-secondary">
-                    <Icon name="heroicons:check-circle" class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                    <span>Batch sizes from 1 to 1000+ units</span>
-                  </li>
-                  <li class="flex items-start space-x-2 text-sm text-text-secondary">
-                    <Icon name="heroicons:check-circle" class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                    <span>Material selection: PLA, PETG, ABS, TPU, Nylon, Resin</span>
-                  </li>
-                  <li class="flex items-start space-x-2 text-sm text-text-secondary">
-                    <Icon name="heroicons:check-circle" class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                    <span>Professional post-processing and finishing services</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="flex items-start space-x-4">
-              <div class="w-12 h-12 bg-gradient-to-br from-accent to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Icon name="lucide:pen-tool" class="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h3 class="text-2xl font-bold mb-2">Design Optimization</h3>
-                <p class="text-text-secondary mb-3">CAD model review and optimization for printability, strength, and cost efficiency. Our engineers ensure your designs are manufacturable and cost-effective.</p>
-                <ul class="space-y-2">
-                  <li class="flex items-start space-x-2 text-sm text-text-secondary">
-                    <Icon name="heroicons:check-circle" class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                    <span>Printability analysis and design recommendations</span>
-                  </li>
-                  <li class="flex items-start space-x-2 text-sm text-text-secondary">
-                    <Icon name="heroicons:check-circle" class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                    <span>Support structure and orientation optimization</span>
-                  </li>
-                  <li class="flex items-start space-x-2 text-sm text-text-secondary">
-                    <Icon name="heroicons:check-circle" class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
-                    <span>Cost reduction through material and process optimization</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+    <PageSection title="Our" highlight="Technology">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl">
+        <FeatureCard
+          v-for="tech in technologies"
+          :key="tech.title"
+          :title="tech.title"
+          :icon="tech.icon"
+          :description="tech.description"
+        />
       </div>
-    </section>
+    </PageSection>
 
-    <!-- Technology -->
-    <section class="section">
-      <div class="container-custom">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-5xl font-bold mb-4">
-            Our <span class="gradient-text">Technology</span>
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <div class="card text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-secondary to-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Icon name="lucide:layers" class="w-8 h-8 text-white" />
-            </div>
-            <h3 class="text-xl font-bold mb-2">FDM Printing</h3>
-            <p class="text-text-secondary text-sm">Fused Deposition Modeling for strong, functional parts with engineering-grade materials</p>
-          </div>
-
-          <div class="card text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Icon name="heroicons:beaker" class="w-8 h-8 text-white" />
-            </div>
-            <h3 class="text-xl font-bold mb-2">Resin Printing</h3>
-            <p class="text-text-secondary text-sm">High-resolution SLA/DLP prints with smooth surface finish and fine details</p>
-          </div>
-
-          <div class="card text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-accent to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Icon name="lucide:palette" class="w-8 h-8 text-white" />
-            </div>
-            <h3 class="text-xl font-bold mb-2">Multi-Material</h3>
-            <p class="text-text-secondary text-sm">Complex prints with multiple materials, colors, and advanced composites</p>
-          </div>
-        </div>
+    <PageSection :alt="true" title="Common" highlight="Use Cases">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
+        <FeatureCard
+          v-for="useCase in useCases"
+          :key="useCase.title"
+          :title="useCase.title"
+          :icon="useCase.icon"
+          :description="useCase.description"
+        />
       </div>
-    </section>
+    </PageSection>
 
-    <!-- Use Cases -->
-    <section class="section bg-dark-100">
-      <div class="container-custom">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-5xl font-bold mb-4">
-            Common <span class="gradient-text">Use Cases</span>
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          <div class="card flex items-start space-x-4">
-            <Icon name="heroicons:cog-6-tooth" class="w-8 h-8 text-secondary flex-shrink-0 mt-1" />
-            <div>
-              <h3 class="text-lg font-bold mb-1">Engineering Prototypes</h3>
-              <p class="text-text-secondary text-sm">Functional prototypes for mechanical testing and design validation</p>
-            </div>
-          </div>
-
-          <div class="card flex items-start space-x-4">
-            <Icon name="lucide:box" class="w-8 h-8 text-secondary flex-shrink-0 mt-1" />
-            <div>
-              <h3 class="text-lg font-bold mb-1">Custom Enclosures</h3>
-              <p class="text-text-secondary text-sm">Protective cases and housings for electronics and IoT projects</p>
-            </div>
-          </div>
-
-          <div class="card flex items-start space-x-4">
-            <Icon name="heroicons:wrench-screwdriver" class="w-8 h-8 text-secondary flex-shrink-0 mt-1" />
-            <div>
-              <h3 class="text-lg font-bold mb-1">Replacement Parts</h3>
-              <p class="text-text-secondary text-sm">On-demand manufacturing for hard-to-find or obsolete components</p>
-            </div>
-          </div>
-
-          <div class="card flex items-start space-x-4">
-            <Icon name="lucide:palette" class="w-8 h-8 text-secondary flex-shrink-0 mt-1" />
-            <div>
-              <h3 class="text-lg font-bold mb-1">Art & Design Projects</h3>
-              <p class="text-text-secondary text-sm">Custom sculptures, architectural models, and artistic creations</p>
-            </div>
-          </div>
-        </div>
+    <PageSection>
+      <div class="card max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-bold mb-3">Request a Quote</h2>
+        <p class="text-text-secondary mb-6">
+          Tell us about your project and we'll provide a detailed quote within 24 hours.
+        </p>
+        <NuxtLink to="/contact" class="btn btn-primary">Get Started</NuxtLink>
       </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section">
-      <div class="container-custom">
-        <div class="card glass text-center max-w-4xl mx-auto p-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Request a Quote
-          </h2>
-          <p class="text-lg text-text-secondary mb-8">
-            Tell us about your project and we'll provide a detailed quote within 24 hours.
-          </p>
-          <NuxtLink to="/contact" class="btn btn-primary text-lg">
-            Get Started
-          </NuxtLink>
-        </div>
-      </div>
-    </section>
+    </PageSection>
   </div>
 </template>
 
@@ -227,4 +67,79 @@ useHead({
     }
   ]
 })
+
+const offers = [
+  {
+    title: 'Rapid Prototyping',
+    icon: 'heroicons:bolt',
+    description: 'Quick turnaround for concept validation and iterative design support. Get your prototypes in days, not weeks. Perfect for validating designs before committing to expensive tooling.',
+    items: [
+      'Functional prototypes for testing and validation',
+      'Iterative design refinement with fast feedback loops',
+      'Fast turnaround times (2-5 business days)'
+    ]
+  },
+  {
+    title: 'Custom Manufacturing',
+    icon: 'lucide:box',
+    badge: 'Coming soon',
+    description: 'Small to medium batch production with a wide range of materials and finishing options. From one-offs to production runs, we handle manufacturing at any scale.',
+    items: [
+      'Batch sizes from 1 to 1000+ units',
+      'Material selection: PLA, PETG, ABS, TPU, Nylon, Resin',
+      'Professional post-processing and finishing services'
+    ]
+  },
+  {
+    title: 'Design Optimization',
+    icon: 'lucide:pen-tool',
+    description: 'CAD model review and optimization for printability, strength, and cost efficiency. Our engineers ensure your designs are manufacturable and cost-effective.',
+    items: [
+      'Printability analysis and design recommendations',
+      'Support structure and orientation optimization',
+      'Cost reduction through material and process optimization'
+    ]
+  }
+]
+
+const technologies = [
+  {
+    title: 'FDM Printing',
+    icon: 'lucide:layers',
+    description: 'Fused Deposition Modeling for strong, functional parts with engineering-grade materials'
+  },
+  {
+    title: 'Resin Printing',
+    icon: 'heroicons:beaker',
+    description: 'High-resolution SLA/DLP prints with smooth surface finish and fine details'
+  },
+  {
+    title: 'Multi-Material',
+    icon: 'lucide:palette',
+    description: 'Complex prints with multiple materials, colors, and advanced composites'
+  }
+]
+
+const useCases = [
+  {
+    title: 'Engineering Prototypes',
+    icon: 'heroicons:cog-6-tooth',
+    description: 'Functional prototypes for mechanical testing and design validation'
+  },
+  {
+    title: 'Custom Enclosures',
+    icon: 'lucide:box',
+    description: 'Protective cases and housings for electronics and IoT projects'
+  },
+  {
+    title: 'Replacement Parts',
+    icon: 'heroicons:wrench-screwdriver',
+    description: 'On-demand manufacturing for hard-to-find or obsolete components'
+  },
+  {
+    title: 'Art & Design Projects',
+    icon: 'lucide:palette',
+    description: 'Custom sculptures, architectural models, and artistic creations'
+  }
+]
 </script>

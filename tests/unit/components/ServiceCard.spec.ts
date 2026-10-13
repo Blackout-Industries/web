@@ -68,6 +68,14 @@ describe('ServiceCard', () => {
       expect(link.exists()).toBe(true)
       expect(link.text()).toContain('Learn More')
     })
+
+    it('renders Coming soon inside a badge when comingSoon is set', () => {
+      const wrapper = mountComponent({ comingSoon: true })
+
+      const badge = wrapper.find('.badge')
+      expect(badge.exists()).toBe(true)
+      expect(badge.text()).toBe('Coming soon')
+    })
   })
 
   describe('Features List', () => {
@@ -99,31 +107,8 @@ describe('ServiceCard', () => {
         features: ['Feature 1', 'Feature 2']
       })
 
-      const checkIcons = wrapper.findAll('[class*="icon-mdi:check-circle"]')
+      const checkIcons = wrapper.findAll('[class*="icon-heroicons:check-circle"]')
       expect(checkIcons.length).toBe(2)
-    })
-  })
-
-  describe('Variant Styling', () => {
-    it('applies primary variant gradient by default', () => {
-      const wrapper = mountComponent()
-
-      const iconWrapper = wrapper.find('[class*="from-primary"]')
-      expect(iconWrapper.exists()).toBe(true)
-    })
-
-    it('applies secondary variant gradient', () => {
-      const wrapper = mountComponent({ variant: 'secondary' })
-
-      const iconWrapper = wrapper.find('[class*="from-secondary"]')
-      expect(iconWrapper.exists()).toBe(true)
-    })
-
-    it('applies accent variant gradient', () => {
-      const wrapper = mountComponent({ variant: 'accent' })
-
-      const iconWrapper = wrapper.find('[class*="from-accent"]')
-      expect(iconWrapper.exists()).toBe(true)
     })
   })
 
@@ -134,10 +119,10 @@ describe('ServiceCard', () => {
       expect(wrapper.find('.card').exists()).toBe(true)
     })
 
-    it('has group class for hover effects', () => {
+    it('root has service-card class', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.find('.group').exists()).toBe(true)
+      expect(wrapper.classes()).toContain('service-card')
     })
 
     it('displays learn more link with arrow icon', () => {

@@ -1,27 +1,20 @@
 <template>
-  <header class="sticky top-0 z-50 glass border-b border-dark-300">
+  <header class="sticky top-0 z-50 bg-dark/95 border-b border-dark-300">
     <nav class="container-custom">
       <div class="flex items-center justify-between h-16 md:h-20">
-        <!-- Logo -->
-        <NuxtLink to="/" class="flex items-center space-x-3 group">
-          <div class="relative w-14 h-14 md:w-16 md:h-16 rounded-lg flex items-center justify-center">
-            <!-- Orange glow -->
-            <div class="absolute inset-0 bg-primary/20 rounded-lg blur-lg group-hover:bg-primary/30 transition-all"></div>
-            <!-- Logo container -->
-            <div class="relative w-full h-full rounded-lg flex items-center justify-center transition-all overflow-hidden">
-              <img
-                src="/logo.png"
-                alt="Blackout Industries"
-                class="w-[140%] h-[140%] object-cover group-hover:scale-110 transition-transform"
-              />
-            </div>
+        <NuxtLink to="/" class="flex items-center space-x-3">
+          <div class="w-14 h-14 md:w-16 md:h-16 rounded-lg flex items-center justify-center overflow-hidden">
+            <img
+              src="/logo.png"
+              alt="Blackout Industries"
+              class="w-[140%] h-[140%] object-cover"
+            />
           </div>
           <span class="text-lg md:text-xl font-bold tracking-tight">
             <span class="text-primary">Blackout</span> <span class="text-text-primary">Industries</span>
           </span>
         </NuxtLink>
 
-        <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center space-x-8">
           <NuxtLink to="/" class="nav-link">Home</NuxtLink>
           <div class="relative group">
@@ -29,8 +22,7 @@
               <span>Services</span>
               <Icon name="heroicons:chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180" />
             </button>
-            <!-- Dropdown -->
-            <div class="absolute top-full left-0 mt-2 w-64 glass rounded-lg border border-dark-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-xl">
+            <div class="absolute top-full left-0 mt-2 w-64 bg-dark-100 rounded-lg border border-dark-300 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 shadow-xl">
               <NuxtLink to="/services" class="dropdown-item">
                 <Icon name="heroicons:squares-2x2" class="w-5 h-5 text-primary" />
                 <div>
@@ -38,15 +30,22 @@
                   <div class="text-xs text-text-tertiary">Overview</div>
                 </div>
               </NuxtLink>
+              <NuxtLink to="/services/developer-platform" class="dropdown-item">
+                <Icon name="heroicons:building-office-2" class="w-5 h-5 text-primary" />
+                <div>
+                  <div class="font-medium">Developer Platform</div>
+                  <div class="text-xs text-text-tertiary">Crossplane + Backstage SaaS</div>
+                </div>
+              </NuxtLink>
               <NuxtLink to="/services/devops-consulting" class="dropdown-item">
-                <Icon name="heroicons:server-stack" class="w-5 h-5 text-accent" />
+                <Icon name="heroicons:server-stack" class="w-5 h-5 text-primary" />
                 <div>
                   <div class="font-medium">DevOps Consulting</div>
                   <div class="text-xs text-text-tertiary">Platform Engineering</div>
                 </div>
               </NuxtLink>
               <NuxtLink to="/services/3d-printing" class="dropdown-item">
-                <Icon name="heroicons:cube-transparent" class="w-5 h-5 text-secondary" />
+                <Icon name="heroicons:cube-transparent" class="w-5 h-5 text-primary" />
                 <div>
                   <div class="font-medium">3D Printing</div>
                   <div class="text-xs text-text-tertiary">Rapid Prototyping</div>
@@ -60,10 +59,10 @@
                 </div>
               </NuxtLink>
               <NuxtLink to="/services/game-development" class="dropdown-item">
-                <Icon name="heroicons:puzzle-piece" class="w-5 h-5 text-accent" />
+                <Icon name="heroicons:puzzle-piece" class="w-5 h-5 text-primary" />
                 <div>
                   <div class="font-medium">Game Development</div>
-                  <div class="text-xs text-text-tertiary">Multiplayer & Backends</div>
+                  <div class="text-xs text-text-tertiary">Handheld PC and Switch</div>
                 </div>
               </NuxtLink>
             </div>
@@ -72,7 +71,6 @@
           <NuxtLink to="/contact" class="btn btn-primary">Contact</NuxtLink>
         </div>
 
-        <!-- Mobile Menu Button -->
         <button
           @click="mobileMenuOpen = !mobileMenuOpen"
           class="md:hidden text-text-primary p-2 hover:bg-dark-200 rounded-lg transition-colors"
@@ -83,18 +81,21 @@
         </button>
       </div>
 
-      <!-- Mobile Menu -->
       <Transition name="mobile-menu">
         <div v-if="mobileMenuOpen" class="md:hidden py-4 border-t border-dark-300">
           <div class="flex flex-col space-y-4">
             <NuxtLink to="/" class="mobile-nav-link" @click="mobileMenuOpen = false">Home</NuxtLink>
             <NuxtLink to="/services" class="mobile-nav-link" @click="mobileMenuOpen = false">All Services</NuxtLink>
+            <NuxtLink to="/services/developer-platform" class="mobile-nav-link pl-4" @click="mobileMenuOpen = false">
+              <Icon name="heroicons:building-office-2" class="w-5 h-5 text-primary" />
+              <span>Developer Platform</span>
+            </NuxtLink>
             <NuxtLink to="/services/devops-consulting" class="mobile-nav-link pl-4" @click="mobileMenuOpen = false">
-              <Icon name="heroicons:server-stack" class="w-5 h-5 text-accent" />
+              <Icon name="heroicons:server-stack" class="w-5 h-5 text-primary" />
               <span>DevOps Consulting</span>
             </NuxtLink>
             <NuxtLink to="/services/3d-printing" class="mobile-nav-link pl-4" @click="mobileMenuOpen = false">
-              <Icon name="heroicons:cube-transparent" class="w-5 h-5 text-secondary" />
+              <Icon name="heroicons:cube-transparent" class="w-5 h-5 text-primary" />
               <span>3D Printing</span>
             </NuxtLink>
             <NuxtLink to="/services/iot-home-automation" class="mobile-nav-link pl-4" @click="mobileMenuOpen = false">
@@ -102,7 +103,7 @@
               <span>IoT & Home Automation</span>
             </NuxtLink>
             <NuxtLink to="/services/game-development" class="mobile-nav-link pl-4" @click="mobileMenuOpen = false">
-              <Icon name="heroicons:puzzle-piece" class="w-5 h-5 text-accent" />
+              <Icon name="heroicons:puzzle-piece" class="w-5 h-5 text-primary" />
               <span>Game Development</span>
             </NuxtLink>
             <NuxtLink to="/about" class="mobile-nav-link" @click="mobileMenuOpen = false">About</NuxtLink>

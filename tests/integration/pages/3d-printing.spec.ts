@@ -2,6 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
 import PrintingPage from '../../../pages/services/3d-printing.vue'
+import PageHero from '../../../components/PageHero.vue'
+import PageSection from '../../../components/PageSection.vue'
+import FeatureCard from '../../../components/FeatureCard.vue'
 
 // Mock Icon component
 const Icon = defineComponent({
@@ -21,7 +24,7 @@ const NuxtLink = defineComponent({
 const mountComponent = () => {
   return mount(PrintingPage, {
     global: {
-      components: { Icon, NuxtLink },
+      components: { Icon, NuxtLink, PageHero, PageSection, FeatureCard },
       stubs: { Icon, NuxtLink },
       mocks: {
         useHead: () => {}
@@ -30,13 +33,17 @@ const mountComponent = () => {
   })
 }
 
+const findSection = (wrapper: ReturnType<typeof mountComponent>, highlight: string) =>
+  wrapper.findAllComponents(PageSection).find(section => section.props('highlight') === highlight)
+
 describe('3D Printing Page (services/3d-printing.vue)', () => {
   describe('Hero Section', () => {
     it('renders page heading', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Precision 3D Printing for')
-      expect(wrapper.text()).toContain('Prototypes & Production')
+      const h1 = wrapper.find('h1')
+      expect(h1.text()).toContain('Precision 3D Printing for')
+      expect(h1.text()).toContain('Prototypes & Production')
     })
 
     it('renders service badge', () => {
@@ -51,11 +58,13 @@ describe('3D Printing Page (services/3d-printing.vue)', () => {
       expect(wrapper.text()).toContain('From concept to physical product')
     })
 
-    it('badge has icon and styling', () => {
+    it('renders the hero through PageHero with its eyebrow', () => {
       const wrapper = mountComponent()
 
-      const badge = wrapper.find('.bg-secondary\\/20.border-secondary\\/50')
-      expect(badge.exists()).toBe(true)
+      const hero = wrapper.findComponent(PageHero)
+      expect(hero.exists()).toBe(true)
+      expect(hero.props('eyebrow')).toBe('3D Printing Services')
+      expect(hero.props('highlight')).toBe('Prototypes & Production')
     })
   })
 
@@ -97,14 +106,32 @@ describe('3D Printing Page (services/3d-printing.vue)', () => {
       expect(wrapper.text()).toContain('Batch sizes from 1 to 1000+')
     })
 
-    it('service cards have checkmark icons', () => {
+    it('renders three offers with three checklist items each', () => {
       const wrapper = mountComponent()
+
+      const offers = findSection(wrapper, 'Offer')!.findAllComponents(FeatureCard)
+      expect(offers.map(card => card.props('title'))).toEqual([
+        'Rapid Prototyping',
+        'Custom Manufacturing',
+        'Design Optimization'
+      ])
+      offers.forEach(card => {
+        expect(card.findAll('li').length).toBe(3)
+      })
 
       const checkIcons = wrapper.findAllComponents(Icon).filter(icon =>
         icon.props('name') === 'heroicons:check-circle'
       )
+      expect(checkIcons.length).toBe(9)
+    })
 
-      expect(checkIcons.length).toBeGreaterThan(10)
+    it('marks custom manufacturing as coming soon in ASCII', () => {
+      const wrapper = mountComponent()
+
+      const manufacturing = wrapper.findAllComponents(FeatureCard)
+        .find(card => card.props('title') === 'Custom Manufacturing')
+      expect(manufacturing!.props('badge')).toBe('Coming soon')
+      expect(manufacturing!.text()).toContain('Coming soon')
     })
   })
 
@@ -118,6 +145,17 @@ describe('3D Printing Page (services/3d-printing.vue)', () => {
       })
     })
 
+    it('renders the three printing technologies', () => {
+      const wrapper = mountComponent()
+
+      const technologies = findSection(wrapper, 'Technology')!.findAllComponents(FeatureCard)
+      expect(technologies.map(card => card.props('title'))).toEqual([
+        'FDM Printing',
+        'Resin Printing',
+        'Multi-Material'
+      ])
+    })
+
     it('has service icons', () => {
       const wrapper = mountComponent()
 
@@ -128,6 +166,20 @@ describe('3D Printing Page (services/3d-printing.vue)', () => {
       })
 
       expect(serviceIcons.length).toBeGreaterThanOrEqual(2)
+    })
+  })
+
+  describe('Use Cases', () => {
+    it('renders the four use cases', () => {
+      const wrapper = mountComponent()
+
+      const useCases = findSection(wrapper, 'Use Cases')!.findAllComponents(FeatureCard)
+      expect(useCases.map(card => card.props('title'))).toEqual([
+        'Engineering Prototypes',
+        'Custom Enclosures',
+        'Replacement Parts',
+        'Art & Design Projects'
+      ])
     })
   })
 
@@ -155,15 +207,14 @@ describe('3D Printing Page (services/3d-printing.vue)', () => {
     it('sections have alternating backgrounds', () => {
       const wrapper = mountComponent()
 
-      const darkSections = wrapper.findAll('.bg-dark-100')
-      expect(darkSections.length).toBeGreaterThan(0)
+      const altFlags = wrapper.findAllComponents(PageSection).map(section => section.props('alt'))
+      expect(altFlags).toEqual([true, false, true, false])
     })
 
-    it('uses card components for content', () => {
+    it('uses FeatureCards for content', () => {
       const wrapper = mountComponent()
 
-      const cards = wrapper.findAll('.card')
-      expect(cards.length).toBeGreaterThanOrEqual(2)
+      expect(wrapper.findAllComponents(FeatureCard).length).toBe(10)
     })
   })
 
@@ -185,6 +236,12 @@ describe('3D Printing Page (services/3d-printing.vue)', () => {
       expect(wrapper.text()).toContain('fast, accurate, reliable')
       expect(wrapper.text()).toContain('Quick turnaround')
     })
+
+    it('renders ASCII-only text', () => {
+      const wrapper = mountComponent()
+
+      expect(/[^\x00-\x7F]/.test(wrapper.text())).toBe(false)
+    })
   })
 
   describe('Call to Action', () => {
@@ -193,6 +250,14 @@ describe('3D Printing Page (services/3d-printing.vue)', () => {
 
       const contactLinks = wrapper.findAll('a[href="/contact"]')
       expect(contactLinks.length).toBeGreaterThan(0)
+    })
+
+    it('CTA asks for a quote', () => {
+      const wrapper = mountComponent()
+
+      expect(wrapper.text()).toContain('Request a Quote')
+      const cta = wrapper.findAll('a[href="/contact"]').find(link => link.text() === 'Get Started')
+      expect(cta).toBeDefined()
     })
   })
 })
