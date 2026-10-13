@@ -36,23 +36,20 @@ describe('TheFooter', () => {
       const wrapper = mountComponent()
 
       expect(wrapper.text()).toContain('Blackout Industries')
-      expect(wrapper.find('span').text()).toBe('B')
+
+      const wordmark = wrapper.findAll('span').map(span => span.text())
+      expect(wordmark).toContain('Blackout')
+      expect(wordmark).toContain('Industries')
+      expect(wrapper.find('img').attributes('alt')).toBe('Blackout Industries')
     })
 
     it('renders company description', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Engineering infrastructure that scales')
-      expect(wrapper.text()).toContain('DevOps consulting')
-      expect(wrapper.text()).toContain('platform engineering')
-      expect(wrapper.text()).toContain('3D printing')
-    })
-
-    it('logo uses gradient background', () => {
-      const wrapper = mountComponent()
-
-      const logo = wrapper.find('.bg-gradient-to-br.from-primary.to-secondary')
-      expect(logo.exists()).toBe(true)
+      expect(wrapper.text()).toContain("K8s clusters that don't crash at 3am.")
+      expect(wrapper.text()).toContain('Infrastructure as actual code.')
+      expect(wrapper.text()).toContain('Games built for handhelds.')
+      expect(wrapper.text()).toContain('Hardware that works.')
     })
   })
 
@@ -60,7 +57,7 @@ describe('TheFooter', () => {
     it('renders GitHub social link', () => {
       const wrapper = mountComponent()
 
-      const githubLink = wrapper.find('a[href="https://github.com/blackoutindustries"]')
+      const githubLink = wrapper.find('a[href="https://github.com/Blackout-Industries"]')
       expect(githubLink.exists()).toBe(true)
       expect(githubLink.attributes('target')).toBe('_blank')
       expect(githubLink.attributes('rel')).toBe('noopener noreferrer')
@@ -118,8 +115,16 @@ describe('TheFooter', () => {
     it('renders service navigation links', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.find('a[href="/services/devops-consulting"]').exists()).toBe(true)
-      expect(wrapper.find('a[href="/services/3d-printing"]').exists()).toBe(true)
+      const serviceLinks = wrapper.findAll('a.footer-link[href^="/services/"]')
+      expect(serviceLinks.length).toBe(5)
+      expect(serviceLinks.map(link => link.attributes('href'))).toEqual([
+        '/services/developer-platform',
+        '/services/devops-consulting',
+        '/services/3d-printing',
+        '/services/iot-home-automation',
+        '/services/game-development'
+      ])
+      expect(serviceLinks[0].text()).toBe('Developer Platform')
     })
 
     it('navigation links have footer-link class', () => {
@@ -135,7 +140,8 @@ describe('TheFooter', () => {
       const wrapper = mountComponent()
 
       const currentYear = new Date().getFullYear()
-      expect(wrapper.text()).toContain(`© ${currentYear} Blackout Industries`)
+      const copyright = String.fromCharCode(0xa9)
+      expect(wrapper.text()).toContain(`${copyright} ${currentYear} Blackout Industries`)
     })
 
     it('renders all rights reserved text', () => {

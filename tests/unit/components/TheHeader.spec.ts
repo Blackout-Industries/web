@@ -1,6 +1,6 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
-import { defineComponent, h } from 'vue'
+import { defineComponent, h, nextTick } from 'vue'
 import TheHeader from '../../../components/TheHeader.vue'
 
 // Mock Nuxt components
@@ -31,13 +31,33 @@ const mountComponent = (options = {}) => {
   })
 }
 
+// script setup state is not writable via setData, so drive the menu like a user
+const toggleMobileMenu = async (wrapper: ReturnType<typeof mountComponent>) => {
+  await wrapper.find('button[aria-label="Toggle menu"]').trigger('click')
+  await nextTick()
+}
+
+const serviceRoutes = [
+  '/services',
+  '/services/developer-platform',
+  '/services/devops-consulting',
+  '/services/3d-printing',
+  '/services/iot-home-automation',
+  '/services/game-development'
+]
+
 describe('TheHeader', () => {
   describe('Logo and Branding', () => {
     it('renders logo with correct text', () => {
       const wrapper = mountComponent()
 
       expect(wrapper.text()).toContain('Blackout Industries')
-      expect(wrapper.find('span').text()).toBe('B')
+
+      const logoLink = wrapper.find('a[href="/"]')
+      const wordmark = logoLink.findAll('span').map(span => span.text())
+      expect(wordmark).toContain('Blackout')
+      expect(wordmark).toContain('Industries')
+      expect(logoLink.find('img').attributes('alt')).toBe('Blackout Industries')
     })
 
     it('logo links to home page', () => {
@@ -72,16 +92,53 @@ describe('TheHeader', () => {
       const wrapper = mountComponent()
 
       const dropdownItems = wrapper.findAll('.dropdown-item')
-      expect(dropdownItems.length).toBe(3)
+      expect(dropdownItems.length).toBe(6)
+      expect(dropdownItems.map(item => item.attributes('href'))).toEqual(serviceRoutes)
 
       const dropdownTexts = dropdownItems.map(item => item.text())
       expect(dropdownTexts).toEqual(
         expect.arrayContaining([
           expect.stringContaining('All Services'),
+          expect.stringContaining('Developer Platform'),
           expect.stringContaining('DevOps Consulting'),
-          expect.stringContaining('3D Printing')
+          expect.stringContaining('3D Printing'),
+          expect.stringContaining('IoT & Home Automation'),
+          expect.stringContaining('Game Development')
         ])
       )
+    })
+
+    it('developer platform item follows All Services and describes the SaaS', () => {
+      const wrapper = mountComponent()
+
+      const dropdownItems = wrapper.findAll('.dropdown-item')
+      expect(dropdownItems[1].attributes('href')).toBe('/services/developer-platform')
+      expect(dropdownItems[1].text()).toContain('Developer Platform')
+      expect(dropdownItems[1].text()).toContain('Crossplane + Backstage SaaS')
+    })
+
+    it('game development item describes the handheld PC and Switch focus', () => {
+      const wrapper = mountComponent()
+
+      const gameDev = wrapper.find('.dropdown-item[href="/services/game-development"]')
+      expect(gameDev.text()).toContain('Game Development')
+      expect(gameDev.text()).toContain('Handheld PC and Switch')
+    })
+
+    it('dropdown items use the expected icons', () => {
+      const wrapper = mountComponent()
+
+      const iconNames = wrapper
+        .findAll('.dropdown-item')
+        .map(item => item.findComponent(Icon).props('name'))
+      expect(iconNames).toEqual([
+        'heroicons:squares-2x2',
+        'heroicons:building-office-2',
+        'heroicons:server-stack',
+        'heroicons:cube-transparent',
+        'heroicons:home-modern',
+        'heroicons:puzzle-piece'
+      ])
     })
 
     it('contact button is present', () => {
@@ -97,7 +154,7 @@ describe('TheHeader', () => {
     it('mobile menu is hidden by default', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.vm.mobileMenuOpen).toBe(false)
+      expect(wrapper.findAll('.mobile-nav-link').length).toBe(0)
     })
 
     it('mobile menu button toggles menu state', async () => {
@@ -105,44 +162,57 @@ describe('TheHeader', () => {
 
       const menuButton = wrapper.find('button[aria-label="Toggle menu"]')
       expect(menuButton.exists()).toBe(true)
+      expect(menuButton.findComponent(Icon).props('name')).toBe('heroicons:bars-3')
 
-      await menuButton.trigger('click')
-      expect(wrapper.vm.mobileMenuOpen).toBe(true)
+      await toggleMobileMenu(wrapper)
+      expect(wrapper.findAll('.mobile-nav-link').length).toBeGreaterThan(0)
+      expect(menuButton.findComponent(Icon).props('name')).toBe('heroicons:x-mark')
 
-      await menuButton.trigger('click')
-      expect(wrapper.vm.mobileMenuOpen).toBe(false)
+      await toggleMobileMenu(wrapper)
+      expect(wrapper.findAll('.mobile-nav-link').length).toBe(0)
+      expect(menuButton.findComponent(Icon).props('name')).toBe('heroicons:bars-3')
     })
 
     it('mobile menu renders navigation links when open', async () => {
       const wrapper = mountComponent()
 
-      await wrapper.setData({ mobileMenuOpen: true })
-      await wrapper.vm.$nextTick()
+      await toggleMobileMenu(wrapper)
 
       const mobileLinks = wrapper.findAll('.mobile-nav-link')
-      expect(mobileLinks.length).toBeGreaterThanOrEqual(5)
+      expect(mobileLinks.length).toBe(8)
+      expect(mobileLinks.map(link => link.attributes('href'))).toEqual([
+        '/',
+        ...serviceRoutes,
+        '/about'
+      ])
 
       const linkTexts = mobileLinks.map(link => link.text())
       expect(linkTexts).toEqual(
         expect.arrayContaining([
           expect.stringContaining('Home'),
           expect.stringContaining('All Services'),
+          expect.stringContaining('Developer Platform'),
           expect.stringContaining('DevOps Consulting'),
           expect.stringContaining('3D Printing'),
+          expect.stringContaining('IoT & Home Automation'),
+          expect.stringContaining('Game Development'),
           expect.stringContaining('About')
         ])
       )
+
+      expect(wrapper.findAll('a[href="/contact"].btn-primary').length).toBe(2)
     })
 
     it('clicking mobile nav link closes menu', async () => {
       const wrapper = mountComponent()
 
-      await wrapper.setData({ mobileMenuOpen: true })
+      await toggleMobileMenu(wrapper)
+      expect(wrapper.findAll('.mobile-nav-link').length).toBeGreaterThan(0)
 
-      const mobileLink = wrapper.find('.mobile-nav-link')
-      await mobileLink.trigger('click')
+      await wrapper.find('.mobile-nav-link').trigger('click')
+      await nextTick()
 
-      expect(wrapper.vm.mobileMenuOpen).toBe(false)
+      expect(wrapper.findAll('.mobile-nav-link').length).toBe(0)
     })
   })
 

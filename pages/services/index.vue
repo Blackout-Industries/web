@@ -1,160 +1,116 @@
 <template>
   <div>
-    <!-- Hero -->
-    <section class="relative py-20 md:py-32 overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-dark via-dark-100 to-dark opacity-90"></div>
-      <div class="absolute inset-0 animated-gradient opacity-10"></div>
+    <PageHero
+      title="Services Built for"
+      highlight="Modern Teams"
+      subtitle="From cloud infrastructure to smart homes, our own games to precision 3D printing - we deliver expertise at scale."
+    />
 
-      <div class="container-custom relative z-10">
-        <div class="max-w-4xl mx-auto text-center">
-          <h1 class="text-4xl md:text-6xl font-bold mb-6">
-            Services Built for
-            <span class="gradient-text block mt-2">Modern Teams</span>
-          </h1>
-          <p class="text-xl md:text-2xl text-text-secondary">
-            From cloud infrastructure to smart homes, game backends to precision 3D printing—we deliver expertise at scale.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services Grid -->
-    <section class="section bg-dark-100">
-      <div class="container-custom">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+    <PageSection :alt="true">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
+        <div class="md:col-span-2">
           <ServiceCard
-            icon="mdi:cloud-outline"
-            title="DevOps & Platform Engineering"
-            description="Build infrastructure that scales with your ambitions. Expert guidance for cloud-native architectures, container orchestration, and automated deployment pipelines."
-            link="/services/devops-consulting"
-            variant="accent"
+            icon="heroicons:building-office-2"
+            title="Developer Platform"
+            description="SaaS product. Internal developer platform as a service. Backstage in front, Crossplane underneath, GitOps in between; we operate it, you own the resources."
+            link="/services/developer-platform"
             :features="[
-              'Cloud infrastructure (AWS, GCP, Azure)',
-              'Kubernetes & container orchestration',
-              'CI/CD pipeline design & automation',
-              'Infrastructure as Code (Terraform CDK, Crossplane)',
-              'Monitoring & observability setup',
-              'Security best practices & compliance'
-            ]"
-          />
-
-          <ServiceCard
-            icon="mdi:cube-outline"
-            title="3D Printing Services"
-            description="Turn digital designs into physical reality. Rapid prototyping, custom manufacturing, and CAD optimization for your next project."
-            link="/services/3d-printing"
-            variant="secondary"
-            :features="[
-              'Rapid prototyping for concept validation',
-              'Custom part manufacturing',
-              'CAD model optimization for printability',
-              'Material selection consulting',
-              'Post-processing & finishing',
-              'Multi-material & multi-color printing'
-            ]"
-          />
-
-          <ServiceCard
-            icon="heroicons:home-modern"
-            title="IoT & Home Automation"
-            description="Smart home solutions and IoT systems that actually work. From concept to deployment, we build intelligent automation that integrates seamlessly with your life."
-            link="/services/iot-home-automation"
-            variant="primary"
-            :coming-soon="true"
-            :features="[
-              'Smart lighting & climate control',
-              'Security systems & monitoring',
-              'Multi-room audio integration',
-              'Energy monitoring & optimization',
-              'Custom sensor development',
-              'Privacy-first architecture'
-            ]"
-          />
-
-          <ServiceCard
-            icon="heroicons:puzzle-piece"
-            title="Game Development"
-            description="From indie prototypes to production-ready multiplayer systems. We build games, game engines, and backend infrastructure that scales."
-            link="/services/game-development"
-            variant="accent"
-            :coming-soon="true"
-            :features="[
-              'Multiplayer backend infrastructure',
-              'Low-latency networking & netcode',
-              'Engine development & optimization',
-              'DevOps & CI/CD for game studios',
-              'Analytics & telemetry systems',
-              'Anti-cheat & security hardening'
+              'Software catalog with ownership and docs',
+              'Golden-path templates for new services',
+              'Self-service databases, clusters and queues',
+              'Argo CD and Kargo promotion pipelines',
+              'Kyverno guardrails and signed images',
+              'Azure AKS and Oracle OKE from one control plane'
             ]"
           />
         </div>
+
+        <ServiceCard
+          icon="mdi:cloud-outline"
+          title="DevOps & Platform Engineering"
+          description="Build infrastructure that scales with your ambitions. Expert guidance for cloud-native architectures, container orchestration, and automated deployment pipelines."
+          link="/services/devops-consulting"
+          :features="[
+            'Cloud infrastructure (AWS, GCP, Azure)',
+            'Kubernetes & container orchestration',
+            'CI/CD pipeline design & automation',
+            'Infrastructure as Code (Terraform CDK, Crossplane)',
+            'Monitoring & observability setup',
+            'Security best practices & compliance'
+          ]"
+        />
+
+        <ServiceCard
+          icon="mdi:cube-outline"
+          title="3D Printing Services"
+          description="Turn digital designs into physical reality. Rapid prototyping, custom manufacturing, and CAD optimization for your next project."
+          link="/services/3d-printing"
+          :features="[
+            'Rapid prototyping for concept validation',
+            'Custom part manufacturing',
+            'CAD model optimization for printability',
+            'Material selection consulting',
+            'Post-processing & finishing',
+            'Multi-material & multi-color printing'
+          ]"
+        />
+
+        <ServiceCard
+          icon="heroicons:home-modern"
+          title="IoT & Home Automation"
+          description="Smart home solutions and IoT systems that actually work. From concept to deployment, we build intelligent automation that integrates seamlessly with your life."
+          link="/services/iot-home-automation"
+          :coming-soon="true"
+          :features="[
+            'Smart lighting & climate control',
+            'Security systems & monitoring',
+            'Multi-room audio integration',
+            'Energy monitoring & optimization',
+            'Custom sensor development',
+            'Privacy-first architecture'
+          ]"
+        />
+
+        <ServiceCard
+          icon="heroicons:puzzle-piece"
+          title="Game Development"
+          description="Our own Windows and Linux games, designed for handheld PCs and Nintendo Switch. Performance, battery and input are tuned on the device, not on a spec sheet."
+          link="/services/game-development"
+          :features="[
+            'Handheld-first design for Steam Deck, ROG Ally and Legion Go',
+            'Windows and Linux builds, native or Proton',
+            'Built to Deck Verified criteria',
+            'Nintendo Switch within platform budgets',
+            'Frame pacing, battery and thermal budgets',
+            'CI pipelines for every build'
+          ]"
+        />
       </div>
-    </section>
+    </PageSection>
 
-    <!-- Process -->
-    <section class="section">
-      <div class="container-custom">
-        <div class="text-center mb-12">
-          <h2 class="text-3xl md:text-5xl font-bold mb-4">
-            How We <span class="gradient-text">Work</span>
-          </h2>
-          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
-            Our proven process ensures smooth delivery from discovery to ongoing support.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-white">1</span>
-            </div>
-            <h3 class="text-xl font-bold mb-2">Discover</h3>
-            <p class="text-text-secondary">Understand your needs, challenges, and goals.</p>
-          </div>
-
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-accent to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-white">2</span>
-            </div>
-            <h3 class="text-xl font-bold mb-2">Design</h3>
-            <p class="text-text-secondary">Architect the solution with best practices.</p>
-          </div>
-
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-secondary to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-white">3</span>
-            </div>
-            <h3 class="text-xl font-bold mb-2">Deliver</h3>
-            <p class="text-text-secondary">Implement with precision and attention to detail.</p>
-          </div>
-
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-br from-primary-light to-primary rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-white">4</span>
-            </div>
-            <h3 class="text-xl font-bold mb-2">Support</h3>
-            <p class="text-text-secondary">Maintain and optimize for continuous improvement.</p>
-          </div>
+    <PageSection
+      title="How We"
+      highlight="Work"
+      subtitle="Our proven process ensures smooth delivery from discovery to ongoing support."
+    >
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl">
+        <div v-for="(step, index) in steps" :key="step.title" class="card">
+          <div class="icon-tile font-mono font-bold mb-4">{{ index + 1 }}</div>
+          <h3 class="text-lg font-semibold mb-2">{{ step.title }}</h3>
+          <p class="text-text-secondary">{{ step.description }}</p>
         </div>
       </div>
-    </section>
+    </PageSection>
 
-    <!-- CTA -->
-    <section class="section bg-dark-100">
-      <div class="container-custom">
-        <div class="card glass text-center max-w-4xl mx-auto p-12">
-          <h2 class="text-3xl md:text-4xl font-bold mb-4">
-            Let's Discuss Your Project
-          </h2>
-          <p class="text-lg text-text-secondary mb-8">
-            Schedule a consultation to explore how we can help you succeed.
-          </p>
-          <NuxtLink to="/contact" class="btn btn-primary text-lg">
-            Get in Touch
-          </NuxtLink>
-        </div>
+    <PageSection :alt="true">
+      <div class="card max-w-3xl">
+        <h2 class="text-2xl md:text-3xl font-bold mb-3">Let's Discuss Your Project</h2>
+        <p class="text-text-secondary mb-6">
+          Schedule a consultation to explore how we can help you succeed.
+        </p>
+        <NuxtLink to="/contact" class="btn btn-primary">Get in Touch</NuxtLink>
       </div>
-    </section>
+    </PageSection>
   </div>
 </template>
 
@@ -164,8 +120,15 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'DevOps consulting, platform engineering, IoT/home automation, game development, and 3D printing services. From Kubernetes to smart homes to multiplayer backends—we deliver precision at scale.'
+      content: 'DevOps consulting, platform engineering, IoT/home automation and 3D printing services, plus games we develop for handheld PCs and Nintendo Switch. From Kubernetes to smart homes - we deliver precision at scale.'
     }
   ]
 })
+
+const steps = [
+  { title: 'Discover', description: 'Understand your needs, challenges, and goals.' },
+  { title: 'Design', description: 'Architect the solution with best practices.' },
+  { title: 'Deliver', description: 'Implement with precision and attention to detail.' },
+  { title: 'Support', description: 'Maintain and optimize for continuous improvement.' }
+]
 </script>

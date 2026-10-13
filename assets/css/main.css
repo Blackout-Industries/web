@@ -18,11 +18,11 @@
 
 @layer components {
   .btn {
-    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200 ease-out;
+    @apply px-6 py-3 rounded-lg font-medium transition-colors duration-200;
   }
 
   .btn-primary {
-    @apply bg-primary hover:bg-primary-dark text-white hover:scale-105 hover:shadow-lg hover:shadow-primary/50;
+    @apply bg-primary hover:bg-primary-dark text-white;
   }
 
   .btn-secondary {
@@ -34,15 +34,23 @@
   }
 
   .card {
-    @apply bg-dark-100 border border-dark-300 rounded-xl p-6 transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10;
+    @apply bg-dark-100 border border-dark-300 rounded-xl p-6 transition-colors duration-200 hover:border-primary/50;
   }
 
-  .glass {
-    @apply bg-dark-100/50 backdrop-blur-lg border border-dark-300/50;
+  .icon-tile {
+    @apply w-10 h-10 rounded-lg bg-primary/10 border border-primary/30 text-primary flex items-center justify-center flex-shrink-0;
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary via-primary-light to-secondary bg-clip-text text-transparent;
+  .tag {
+    @apply px-3 py-1 rounded-full border border-dark-300 bg-dark-200 text-sm font-mono text-text-secondary;
+  }
+
+  .badge {
+    @apply px-2.5 py-0.5 rounded-full border border-primary/40 text-xs font-mono uppercase tracking-wider text-primary;
+  }
+
+  .eyebrow {
+    @apply text-xs font-mono uppercase tracking-wider text-primary;
   }
 
   .section {
@@ -57,25 +65,6 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
-  }
-
-  .glow-primary {
-    box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
-  }
-
-  .glow-secondary {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
-  }
-
-  .animated-gradient {
-    background: linear-gradient(135deg, #0EA5E9 0%, #8B5CF6 50%, #10B981 100%);
-    background-size: 200% 200%;
-    animation: gradient 3s ease infinite;
-  }
-
-  @keyframes gradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
   }
 }
 

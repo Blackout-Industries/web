@@ -2,6 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
 import IndexPage from '../../../pages/index.vue'
+import PageHero from '../../../components/PageHero.vue'
+import PageSection from '../../../components/PageSection.vue'
+import FeatureCard from '../../../components/FeatureCard.vue'
 
 // Mock Nuxt components
 const NuxtLink = defineComponent({
@@ -19,7 +22,7 @@ const Icon = defineComponent({
 })
 
 const ServiceCard = defineComponent({
-  props: ['icon', 'title', 'description', 'link', 'features', 'variant'],
+  props: ['icon', 'title', 'description', 'link', 'features', 'comingSoon'],
   setup(props) {
     return () => h('div', { class: 'service-card' }, [
       h('h3', props.title),
@@ -38,111 +41,198 @@ const TechStack = defineComponent({
 const mountComponent = () => {
   return mount(IndexPage, {
     global: {
-      components: { NuxtLink, Icon, ServiceCard, TechStack },
+      components: { NuxtLink, Icon, ServiceCard, TechStack, PageHero, PageSection, FeatureCard },
       stubs: {
         NuxtLink,
         Icon,
         ServiceCard,
         TechStack
-      },
-      mocks: {
-        useHead: () => {}
       }
     }
   })
 }
 
+const findSectionByHeading = (wrapper: ReturnType<typeof mountComponent>, heading: string) => {
+  return wrapper.findAll('section').find(section => {
+    const h2 = section.find('h2')
+    return h2.exists() && h2.text().includes(heading)
+  })
+}
+
 describe('Home Page (index.vue)', () => {
   describe('Hero Section', () => {
-    it('renders main hero heading', () => {
+    it('renders a single h1 with the title and highlight', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Engineering Infrastructure')
-      expect(wrapper.text()).toContain('That Scales')
+      const h1s = wrapper.findAll('h1')
+      expect(h1s.length).toBe(1)
+      expect(h1s[0].text()).toContain('Engineering Infrastructure')
+      expect(h1s[0].text()).toContain('That Scales')
     })
 
-    it('renders hero subheading', () => {
+    it('renders the hero subtitle', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('DevOps consulting')
-      expect(wrapper.text()).toContain('platform engineering')
-      expect(wrapper.text()).toContain('precision 3D printing')
+      const hero = wrapper.findComponent(PageHero)
+      expect(hero.find('p').text()).toBe(
+        "K8s clusters that don't crash at 3am. Infrastructure as actual code. Games built for handhelds. Hardware that works."
+      )
     })
 
-    it('hero section has minimum height', () => {
+    it('renders the Explore Services and Get in Touch actions', () => {
       const wrapper = mountComponent()
 
-      const heroSection = wrapper.find('.min-h-\\[80vh\\]')
-      expect(heroSection.exists()).toBe(true)
-    })
+      const hero = wrapper.findComponent(PageHero)
+      const explore = hero.find('a[href="#services"]')
+      expect(explore.exists()).toBe(true)
+      expect(explore.text()).toBe('Explore Services')
 
-    it('renders CTA buttons in hero', () => {
-      const wrapper = mountComponent()
-
-      const exploreButton = wrapper.find('a[href="#services"]')
-      expect(exploreButton.exists()).toBe(true)
-      expect(exploreButton.text()).toContain('Explore Services')
-
-      const contactButton = wrapper.find('a[href="/contact"]')
-      expect(contactButton.exists()).toBe(true)
-      expect(contactButton.text()).toContain('Get in Touch')
-    })
-
-    it('renders scroll indicator', () => {
-      const wrapper = mountComponent()
-
-      const scrollIndicator = wrapper.find('.animate-bounce')
-      expect(scrollIndicator.exists()).toBe(true)
+      const contact = hero.find('a[href="/contact"]')
+      expect(contact.exists()).toBe(true)
+      expect(contact.text()).toBe('Get in Touch')
     })
   })
 
-  describe('Services Preview Section', () => {
-    it('renders services section heading', () => {
+  describe('Services Section', () => {
+    it('has the services anchor target for the hero link', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Our')
-      expect(wrapper.text()).toContain('Services')
+      expect(wrapper.find('section#services').exists()).toBe(true)
     })
 
-    it('services section has id for anchor navigation', () => {
+    it('renders the section heading and subtitle', () => {
       const wrapper = mountComponent()
 
-      const servicesSection = wrapper.find('#services')
-      expect(servicesSection.exists()).toBe(true)
+      const section = wrapper.find('section#services')
+      expect(section.find('h2').text()).toContain('What We')
+      expect(section.find('h2').text()).toContain('Actually Do')
+      expect(section.text()).toContain('No fluff. No buzzwords. Just infrastructure that survives production.')
     })
 
-    it('renders two service cards', () => {
+    it('renders five service cards in order', () => {
       const wrapper = mountComponent()
 
-      const serviceCards = wrapper.findAllComponents(ServiceCard)
-      expect(serviceCards.length).toBe(2)
+      const cards = wrapper.findAllComponents(ServiceCard)
+      expect(cards.length).toBe(5)
+      expect(cards.map(card => card.props('title'))).toEqual([
+        'Developer Platform',
+        'DevOps Consulting',
+        '3D Printing',
+        'IoT & Home Automation',
+        'Game Development'
+      ])
     })
 
-    it('renders DevOps consulting service card', () => {
+    it('links every service card to its detail page', () => {
       const wrapper = mountComponent()
 
-      const devopsCard = wrapper.findAllComponents(ServiceCard)[0]
-      expect(devopsCard.props('title')).toBe('DevOps Consulting')
-      expect(devopsCard.props('link')).toBe('/services/devops-consulting')
-      expect(devopsCard.props('variant')).toBe('accent')
-      expect(devopsCard.props('features')).toHaveLength(4)
+      const links = wrapper.findAllComponents(ServiceCard).map(card => card.props('link'))
+      expect(links).toEqual([
+        '/services/developer-platform',
+        '/services/devops-consulting',
+        '/services/3d-printing',
+        '/services/iot-home-automation',
+        '/services/game-development'
+      ])
     })
 
-    it('renders 3D printing service card', () => {
+    it('renders the Developer Platform SaaS card first', () => {
       const wrapper = mountComponent()
 
-      const printingCard = wrapper.findAllComponents(ServiceCard)[1]
-      expect(printingCard.props('title')).toBe('3D Printing Services')
-      expect(printingCard.props('link')).toBe('/services/3d-printing')
-      expect(printingCard.props('variant')).toBe('secondary')
-      expect(printingCard.props('features')).toHaveLength(4)
+      const platform = wrapper.findAllComponents(ServiceCard)[0]
+      expect(platform.props('title')).toBe('Developer Platform')
+      expect(platform.props('icon')).toBe('heroicons:building-office-2')
+      expect(platform.props('link')).toBe('/services/developer-platform')
+      expect(platform.props('comingSoon')).toBeFalsy()
+      expect(platform.props('description')).toMatch(/^SaaS product\. /)
+      expect(platform.props('description')).toBe(
+        'SaaS product. Our hosted internal developer platform on Crossplane and Backstage. Catalog, golden paths and self-service infrastructure on Azure and Oracle Cloud, run by us.'
+      )
+      expect(platform.props('features')).toEqual([
+        'Backstage catalog and golden-path templates',
+        'Crossplane self-service infrastructure',
+        'GitOps delivery with Argo CD and Kargo',
+        'Runs in your Azure or Oracle Cloud subscription'
+      ])
     })
 
-    it('service cards are in responsive grid', () => {
+    it('renders the DevOps card with four features', () => {
       const wrapper = mountComponent()
 
-      const grid = wrapper.find('.grid.grid-cols-1.md\\:grid-cols-2')
-      expect(grid.exists()).toBe(true)
+      const devops = wrapper.findAllComponents(ServiceCard)[1]
+      expect(devops.props('features')).toHaveLength(4)
+      expect(devops.props('comingSoon')).toBeFalsy()
+    })
+
+    it('renders the 3D printing card with four features', () => {
+      const wrapper = mountComponent()
+
+      const printing = wrapper.findAllComponents(ServiceCard)[2]
+      expect(printing.props('features')).toHaveLength(4)
+      expect(printing.props('comingSoon')).toBeFalsy()
+    })
+
+    it('keeps the IoT card marked as coming soon', () => {
+      const wrapper = mountComponent()
+
+      const iot = wrapper.findAllComponents(ServiceCard)[3]
+      expect(iot.props('title')).toBe('IoT & Home Automation')
+      expect(iot.props('comingSoon')).toBe(true)
+    })
+
+    it('renders the game development card unlocked with handheld content', () => {
+      const wrapper = mountComponent()
+
+      const game = wrapper.findAllComponents(ServiceCard)[4]
+      expect(game.props('title')).toBe('Game Development')
+      expect(game.props('link')).toBe('/services/game-development')
+      expect(game.props('comingSoon')).toBeFalsy()
+      expect(game.props('description')).toBe(
+        'We develop Windows and Linux games built for Steam Deck, ROG Ally, Legion Go and Nintendo Switch. Frame rate and battery budgets are set on the device from day one.'
+      )
+      expect(game.props('features')).toEqual([
+        'Handheld-first design for Steam Deck, ROG Ally and Legion Go',
+        'Native Linux and Proton builds',
+        'Built to Deck Verified criteria',
+        'Nintendo Switch within platform budgets'
+      ])
+    })
+
+    it('presents game development as own games, not a client service', () => {
+      const wrapper = mountComponent()
+
+      const game = wrapper.findAllComponents(ServiceCard)[4]
+      const copy = [game.props('description'), ...game.props('features')].join(' ')
+      expect(copy).not.toMatch(/readiness|client|engagement/i)
+    })
+
+    it('marks only one service card as coming soon', () => {
+      const wrapper = mountComponent()
+
+      const comingSoon = wrapper.findAllComponents(ServiceCard).filter(card => card.props('comingSoon'))
+      expect(comingSoon.length).toBe(1)
+    })
+  })
+
+  describe('Defense and Classified Block', () => {
+    it('renders the block heading, badge and areas', () => {
+      const wrapper = mountComponent()
+
+      const section = wrapper.find('section#services')
+      expect(section.text()).toContain('Defense & Classified Systems')
+      expect(section.text()).toContain('Restricted')
+      expect(section.text()).toContain('Autonomous systems')
+      expect(section.text()).toContain('Drone infrastructure')
+      expect(section.text()).toContain('Secure telemetry')
+      expect(section.text()).toContain('Air-gapped networks')
+    })
+
+    it('links to the contact page', () => {
+      const wrapper = mountComponent()
+
+      const section = wrapper.find('section#services')
+      const link = section.findAll('a[href="/contact"]').find(a => a.text().includes('Contact Us Directly'))
+      expect(link).toBeTruthy()
     })
   })
 
@@ -150,128 +240,94 @@ describe('Home Page (index.vue)', () => {
     it('renders TechStack component', () => {
       const wrapper = mountComponent()
 
-      const techStack = wrapper.findComponent(TechStack)
-      expect(techStack.exists()).toBe(true)
+      expect(wrapper.findComponent(TechStack).exists()).toBe(true)
     })
   })
 
-  describe('Why Blackout Industries Section', () => {
-    it('renders section heading', () => {
+  describe('Why Us Section', () => {
+    it('renders the section heading and subtitle', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Why')
-      expect(wrapper.text()).toContain('Blackout Industries')
+      const section = findSectionByHeading(wrapper, 'Why Us')
+      expect(section).toBeTruthy()
+      expect(section!.find('h2').text()).toContain('Over Them')
+      expect(section!.text()).toContain("Because we've been on-call at 3am fixing someone else's mess. We know what breaks.")
     })
 
-    it('renders three value proposition cards', () => {
+    it('renders three feature cards with titles', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Technical Excellence')
-      expect(wrapper.text()).toContain('Rapid Execution')
-      expect(wrapper.text()).toContain('End-to-End Support')
+      const cards = wrapper.findAllComponents(FeatureCard)
+      expect(cards.length).toBe(3)
+      expect(cards.map(card => card.props('title'))).toEqual([
+        'Battle-Tested',
+        'Ship or Die',
+        'No Hand-Holding'
+      ])
     })
 
-    it('value cards have descriptive content', () => {
+    it('feature cards carry their icons and descriptions', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Deep expertise in cloud-native')
-      expect(wrapper.text()).toContain('Deliver MVPs in weeks')
-      expect(wrapper.text()).toContain('From strategy to implementation')
-    })
-
-    it('value cards have icons', () => {
-      const wrapper = mountComponent()
-
-      const icons = wrapper.findAllComponents(Icon)
-      const valueIcons = icons.filter(icon => {
-        const name = icon.props('name')
-        return name === 'heroicons:sparkles' ||
-               name === 'heroicons:rocket-launch' ||
-               name === 'heroicons:hand-raised'
-      })
-
-      expect(valueIcons.length).toBeGreaterThanOrEqual(3)
+      const cards = wrapper.findAllComponents(FeatureCard)
+      expect(cards.map(card => card.props('icon'))).toEqual([
+        'heroicons:sparkles',
+        'heroicons:rocket-launch',
+        'heroicons:hand-raised'
+      ])
+      expect(cards[0].text()).toContain('production incidents')
+      expect(cards[1].text()).toContain('MVPs in weeks')
+      expect(cards[2].text()).toContain('No vendor lock-in')
     })
   })
 
   describe('CTA Section', () => {
-    it('renders final CTA heading', () => {
+    it('renders the closing CTA heading and copy', () => {
       const wrapper = mountComponent()
 
-      expect(wrapper.text()).toContain('Ready to Transform Your Infrastructure')
+      const section = findSectionByHeading(wrapper, 'Tired of Infrastructure That Falls Over?')
+      expect(section).toBeTruthy()
+      expect(section!.text()).toContain('Stop pretending YAML files are infrastructure.')
+      expect(section!.text()).toContain("Let's build something that actually works.")
     })
 
-    it('renders consultation CTA button', () => {
+    it("renders the Let's Talk button linking to contact", () => {
       const wrapper = mountComponent()
 
-      const ctaButton = wrapper.findAll('a[href="/contact"]')
-      const consultationButton = ctaButton.find(btn =>
-        btn.text().includes('Schedule a Consultation')
-      )
-
-      expect(consultationButton).toBeTruthy()
-    })
-
-    it('CTA section has glass card styling', () => {
-      const wrapper = mountComponent()
-
-      const glassCards = wrapper.findAll('.card.glass')
-      expect(glassCards.length).toBeGreaterThan(0)
+      const section = findSectionByHeading(wrapper, 'Tired of Infrastructure That Falls Over?')
+      const button = section!.find('a[href="/contact"]')
+      expect(button.exists()).toBe(true)
+      expect(button.text()).toBe("Let's Talk")
     })
   })
 
   describe('Page Structure', () => {
-    it('has multiple sections', () => {
+    it('renders hero, services, why us and CTA sections', () => {
       const wrapper = mountComponent()
 
-      const sections = wrapper.findAll('section')
-      expect(sections.length).toBeGreaterThanOrEqual(5)
+      expect(wrapper.findAll('section').length).toBe(4)
+      expect(wrapper.findAllComponents(PageSection).length).toBe(3)
     })
 
-    it('sections alternate background colors', () => {
+    it('uses a heading hierarchy', () => {
       const wrapper = mountComponent()
 
-      const darkSections = wrapper.findAll('.bg-dark-100')
-      expect(darkSections.length).toBeGreaterThan(0)
-    })
-  })
-
-  describe('Responsive Design', () => {
-    it('uses container-custom for consistent width', () => {
-      const wrapper = mountComponent()
-
-      const containers = wrapper.findAll('.container-custom')
-      expect(containers.length).toBeGreaterThan(0)
-    })
-
-    it('hero text scales responsively', () => {
-      const wrapper = mountComponent()
-
-      const heroHeading = wrapper.find('.text-4xl.md\\:text-6xl.lg\\:text-7xl')
-      expect(heroHeading.exists()).toBe(true)
-    })
-
-    it('CTA buttons stack on mobile', () => {
-      const wrapper = mountComponent()
-
-      const buttonContainer = wrapper.find('.flex-col.sm\\:flex-row')
-      expect(buttonContainer.exists()).toBe(true)
+      expect(wrapper.findAll('h2').length).toBe(3)
+      expect(wrapper.findAll('h3').length).toBeGreaterThanOrEqual(8)
     })
   })
 
-  describe('SEO and Metadata', () => {
-    it('page has semantic structure', () => {
+  describe('Content Rules', () => {
+    it('renders ASCII-only text', () => {
       const wrapper = mountComponent()
 
-      const headings = wrapper.findAll('h1, h2, h3')
-      expect(headings.length).toBeGreaterThan(5)
+      expect(wrapper.text()).not.toMatch(/[^\x00-\x7F]/)
     })
 
-    it('uses text-balance for better readability', () => {
+    it('never uses the word AI', () => {
       const wrapper = mountComponent()
 
-      const balancedText = wrapper.findAll('.text-balance')
-      expect(balancedText.length).toBeGreaterThan(0)
+      expect(wrapper.text()).not.toMatch(/\bAI\b/)
     })
   })
 })

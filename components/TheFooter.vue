@@ -5,24 +5,19 @@
         <!-- Brand -->
         <div class="col-span-1 md:col-span-2">
           <div class="flex items-center space-x-3 mb-4">
-            <div class="relative w-14 h-14 rounded-lg flex items-center justify-center">
-              <!-- Orange glow -->
-              <div class="absolute inset-0 bg-primary/15 rounded-lg blur-lg"></div>
-              <!-- Logo container -->
-              <div class="relative w-full h-full rounded-lg flex items-center justify-center overflow-hidden">
-                <img
-                  src="/logo.png"
-                  alt="Blackout Industries"
-                  class="w-[140%] h-[140%] object-cover"
-                />
-              </div>
+            <div class="w-14 h-14 rounded-lg flex items-center justify-center overflow-hidden">
+              <img
+                src="/logo.png"
+                alt="Blackout Industries"
+                class="w-[140%] h-[140%] object-cover"
+              />
             </div>
             <span class="text-xl font-bold">
               <span class="text-primary">Blackout</span> <span class="text-text-primary">Industries</span>
             </span>
           </div>
           <p class="text-text-secondary max-w-md mb-4">
-            K8s clusters that don't crash at 3am. Infrastructure as actual code. Game servers that ship. Hardware that works.
+            K8s clusters that don't crash at 3am. Infrastructure as actual code. Games built for handhelds. Hardware that works.
           </p>
           <div class="flex space-x-4">
             <a href="https://github.com/Blackout-Industries" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
@@ -47,6 +42,7 @@
         <div>
           <h3 class="text-text-primary font-semibold mb-4">Services</h3>
           <ul class="space-y-2">
+            <li><NuxtLink to="/services/developer-platform" class="footer-link">Developer Platform</NuxtLink></li>
             <li><NuxtLink to="/services/devops-consulting" class="footer-link">DevOps Consulting</NuxtLink></li>
             <li><NuxtLink to="/services/3d-printing" class="footer-link">3D Printing</NuxtLink></li>
             <li><NuxtLink to="/services/iot-home-automation" class="footer-link">IoT & Home Automation</NuxtLink></li>
@@ -79,6 +75,6 @@ const currentYear = new Date().getFullYear()
 }
 
 .social-link {
-  @apply text-text-secondary hover:text-primary transition-all duration-200 hover:scale-110;
+  @apply text-text-secondary hover:text-primary transition-colors duration-200;
 }
 </style>
